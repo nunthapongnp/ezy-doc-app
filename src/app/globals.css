@@ -128,3 +128,37 @@
     @apply font-sans;
   }
 }
+
+:root {
+  scroll-behavior: smooth;
+}
+
+@media print {
+  nav,
+  aside,
+  .zoom-toolbar {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  #a4-container {
+    box-shadow: none !important;
+    width: 210mm;
+    height: 297mm;
+    transform: none !important;
+    margin: 0 auto;
+    background-color: white !important; /* บังคับสีขาวตอนพิมพ์ */
+  }
+}
+
+#a4-container {
+  backface-visibility: hidden;
+  will-change: transform;
+}
