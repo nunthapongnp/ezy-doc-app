@@ -3,7 +3,7 @@ import { Noto_Sans } from "next/font/google";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { LanguageSwitcher } from "@/components/view/core/LanguageSwitcher";
-import { TolgeeAppProvider } from "@/lib/tolgee/provider";
+import { TolgeeNextProvider } from "@/lib/tolgee/client";
 import { APP_NAME, LOCALES, type AppLocale } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import "../globals.css";
@@ -46,7 +46,7 @@ export default async function LocaleLayout({
           notoSans.className,
         )}
       >
-        <TolgeeAppProvider locale={locale as AppLocale}>
+        <TolgeeNextProvider locale={locale as AppLocale}>
           <div className="relative flex min-h-screen flex-col">
             <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
               <div className="container flex h-16 items-center justify-between px-4">
@@ -61,7 +61,7 @@ export default async function LocaleLayout({
               © 2026 {APP_NAME}. Session-only — export PDF before leaving.
             </footer>
           </div>
-        </TolgeeAppProvider>
+        </TolgeeNextProvider>
       </body>
     </html>
   );

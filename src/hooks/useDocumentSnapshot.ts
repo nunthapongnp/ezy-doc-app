@@ -1,5 +1,6 @@
 "use client";
 
+import { useTolgee } from "@tolgee/react";
 import { useMemo } from "react";
 import { computeDocNumber } from "@/lib/docNumber";
 import { buildPdfLabels } from "@/lib/pdf/buildPdfLabels";
@@ -16,6 +17,7 @@ export function useDocumentSnapshot(): {
   const { doc } = useDocumentStore();
   const { config } = useConfigStore();
   const { vendor } = useVendorStore();
+  const tolgee = useTolgee(["language", "cache"]);
 
   return useMemo(() => {
     if (!doc.docType) return { snapshot: null, labels: null };
@@ -61,12 +63,12 @@ export function useDocumentSnapshot(): {
       taxRate: config.taxRate,
     };
 
-    const labels = buildPdfLabels(
-      config.language,
-      doc.docType,
-      config.taxRate,
-    );
+    const pdfLang = config.language;
+    const t = (key: string, params?: Record<string, string | number>) =>
+      tolgee.t(key, { language: pdfLang, ...params });
+
+    const labels = buildPdfLabels(t, doc.docType, config.taxRate);
 
     return { snapshot, labels };
-  }, [doc, config, vendor]);
+  }, [doc, config, vendor, tolgee]);
 }
