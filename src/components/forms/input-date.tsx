@@ -183,7 +183,6 @@ export function InputDate({
                         onSelect={handleCalendarSelect}
                         month={month}
                         onMonthChange={setMonth}
-                        initialFocus
                     />
                 </PopoverContent>
             </Popover>
