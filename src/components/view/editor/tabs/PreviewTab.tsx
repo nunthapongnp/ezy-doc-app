@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 import { registerPdfFonts } from "@/lib/pdf/fontFamily";
 import { TEMPLATE_MAP } from "@/lib/pdf/templateMap";
-import { useVignetteAd } from "@/components/ads/VignetteAdTrigger";
+import { useVignetteAd } from "@/components/view/ads/VignetteAdTrigger";
 import { useDocumentSnapshot } from "@/hooks/useDocumentSnapshot";
 
 registerPdfFonts();

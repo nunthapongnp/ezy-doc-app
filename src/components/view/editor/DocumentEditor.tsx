@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { useTranslate } from "@tolgee/react";
 import { Download, RotateCcw } from "lucide-react";
-import { BannerAd } from "@/components/ads/BannerAd";
-import { SidebarAd } from "@/components/ads/SidebarAd";
-import { AdFreeTeaser } from "@/components/layout/AdFreeTeaser";
-import { SessionWarningBanner } from "@/components/layout/SessionWarningBanner";
+import { BannerAd } from "@/components/view/ads/BannerAd";
+import { SidebarAd } from "@/components/view/ads/SidebarAd";
+import { AdFreeTeaser } from "@/components/view/layout/AdFreeTeaser";
+import { SessionWarningBanner } from "@/components/view/layout/SessionWarningBanner";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { routeToDocType, type DocumentRoute } from "@/lib/constants";
@@ -26,7 +26,7 @@ interface DocumentEditorProps {
 
 export function DocumentEditor({ route }: DocumentEditorProps) {
   const { t } = useTranslate();
-  const [activeTab, setActiveTab] = useState<EditorTab>("config");
+  const [activeTab, setActiveTab] = useState<EditorTab>("edit");
   const docType = routeToDocType(route);
   const setDocType = useDocumentStore((s) => s.setDocType);
   const { config } = useConfigStore();
@@ -43,8 +43,8 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
   }, [config.includeTax, config.taxRate, recalcTotals]);
 
   const tabs: { id: EditorTab; label: string }[] = [
-    { id: "config", label: t("EDITOR.TAB_CONFIG") },
     { id: "edit", label: t("EDITOR.TAB_EDIT") },
+    { id: "config", label: t("EDITOR.TAB_CONFIG") },
     { id: "preview", label: t("EDITOR.TAB_PREVIEW") },
   ];
 
@@ -59,9 +59,9 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
     <div className="flex h-[calc(100vh-4rem)] flex-col">
       <SessionWarningBanner />
       <BannerAd />
-
-      <div className="flex flex-1 overflow-hidden">
-        <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex min-h-0 flex-1 overflow-hidden">
+        {/* <SidebarAd /> */}
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
           <div
             className="flex border-b bg-card"
             role="tablist"
@@ -86,11 +86,11 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
             ))}
           </div>
 
-          <div className="flex-1 overflow-hidden" role="tabpanel">
-            {activeTab === "edit" && <EditTab docType={docType} />}
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden" role="tabpanel">
             {activeTab === "config" && <ConfigTab />}
+            {activeTab === "edit" && <EditTab docType={docType} />}
             {activeTab === "preview" && (
-              <PreviewTab isActive={activeTab === "preview"} />
+              <PreviewTab isActive />
             )}
           </div>
 

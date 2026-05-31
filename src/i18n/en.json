@@ -1,0 +1,62 @@
+{
+  "NAV": {
+    "QUOTATION": "Quotation",
+    "INVOICE": "Invoice",
+    "ACCEPTANCE": "Acceptance Certificate",
+    "RECEIPT": "Receipt",
+    "HOME": "Home"
+  },
+  "CONFIG": {
+    "DOC_LANGUAGE": "Document Language",
+    "DOC_LANGUAGE_HINT": "This changes the language of the exported PDF",
+    "DOC_NUMBER": "Document Number",
+    "SHOW_DOC_NUMBER": "Show document number on PDF",
+    "INCLUDE_TAX": "Include tax",
+    "TAX_RATE_LABEL": "Tax rate (%)"
+  },
+  "EDITOR": {
+    "TAB_EDIT": "Edit",
+    "TAB_CONFIG": "Config",
+    "TAB_PREVIEW": "Preview",
+    "DOC_NO": "Document No.",
+    "REF_NO": "Reference No.",
+    "DOC_DATE": "Date",
+    "EXPIRY_DATE": "Valid Until",
+    "DUE_DATE": "Due Date",
+    "VENDOR": "From",
+    "CUSTOMER": "Bill To",
+    "ITEM_DESC": "Description",
+    "ITEM_QTY": "Qty",
+    "ITEM_UNIT": "Unit",
+    "ITEM_UNIT_PRICE": "Unit Price",
+    "ITEM_AMOUNT": "Amount",
+    "TAX_RATE": "Tax Rate (%)",
+    "SUBTOTAL": "Subtotal",
+    "TAX": "Tax ({rate}%)",
+    "TOTAL": "Total",
+    "REMARK": "Notes / Payment Terms",
+    "EXPORT_PDF": "Export PDF",
+    "CLEAR_FORM": "Clear Form",
+    "PAYMENT_METHOD": "Payment Method",
+    "LOGO": "Company Logo",
+    "BANK_INFO": "Bank Details"
+  },
+  "PDF": {
+    "QUOTATION_TITLE": "Quotation",
+    "INVOICE_TITLE": "Invoice",
+    "ACCEPTANCE_TITLE": "Acceptance Certificate",
+    "RECEIPT_TITLE": "Receipt"
+  },
+  "WARNING": {
+    "SESSION_ONLY": "Your document is not saved. Export PDF before leaving this page."
+  },
+  "LANDING": {
+    "HERO_TITLE": "Create Quotations, Invoices & Receipts — Free, Instant PDF",
+    "HERO_SUBTITLE": "Professional business documents in your browser. No sign-up, no server storage.",
+    "TOOLS_TITLE": "Choose a document type"
+  },
+  "ADS": {
+    "REMOVE_ADS": "Tired of ads?",
+    "PRO_LINK": "EZY-Doc Pro — No ads, cloud save, share links"
+  }
+}

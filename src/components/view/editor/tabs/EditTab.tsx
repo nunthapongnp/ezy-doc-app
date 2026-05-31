@@ -6,7 +6,7 @@ import { Plus, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { LogoUpload } from "@/components/logo/LogoUpload";
+import { LogoUpload } from "@/components/view/logo/LogoUpload";
 import { computeDocNumber } from "@/lib/docNumber";
 import { useConfigStore } from "@/stores/configStore";
 import { useDocumentStore } from "@/stores/documentStore";
@@ -38,7 +38,7 @@ export function EditTab({ docType }: EditTabProps) {
   const isReceipt = docType === "RECEIPT";
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6 p-6 overflow-y-auto">
+    <div className="mx-auto max-w-3xl space-y-6 p-6 overflow-y-auto h-full">
       <LogoUpload />
 
       <div className="grid gap-4 sm:grid-cols-2">

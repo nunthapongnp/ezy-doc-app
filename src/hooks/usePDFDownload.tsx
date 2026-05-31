@@ -1,7 +1,7 @@
 "use client";
 
 import { pdf } from "@react-pdf/renderer";
-import { useVignetteAd } from "@/components/ads/VignetteAdTrigger";
+import { useVignetteAd } from "@/components/view/ads/VignetteAdTrigger";
 import { TEMPLATE_MAP } from "@/lib/pdf/templateMap";
 import { useDocumentSnapshot } from "./useDocumentSnapshot";
 

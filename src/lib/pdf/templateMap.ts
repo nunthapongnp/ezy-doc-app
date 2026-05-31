@@ -1,5 +1,5 @@
-import { DocumentPdfTemplate } from "@/components/pdf/DocumentPdfTemplate";
-import type { DocumentPdfTemplateProps } from "@/components/pdf/DocumentPdfTemplate";
+import { DocumentPdfTemplate } from "@/components/view/pdf/DocumentPdfTemplate";
+import type { DocumentPdfTemplateProps } from "@/components/view/pdf/DocumentPdfTemplate";
 import type { DocType } from "@/types/document";
 import type { ComponentType } from "react";
 

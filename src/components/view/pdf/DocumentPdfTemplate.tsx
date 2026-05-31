@@ -38,7 +38,7 @@ export function DocumentPdfTemplate({ data, labels }: DocumentPdfTemplateProps) 
           labels={labels}
         />
         <PdfLineItems items={data.items} labels={labels} />
-        <View style={{ flexDirection: "row", marginTop: 20, gap: 24 }}>
+        <View style={{ flexDirection: "row", marginTop: 20 }}>
           {data.remark ? (
             <View style={{ flex: 1 }}>
               <Text style={{ fontSize: 8, fontWeight: "bold", marginBottom: 4 }}>

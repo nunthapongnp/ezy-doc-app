@@ -31,7 +31,7 @@ export const pdfStyles = StyleSheet.create({
   },
   partiesRow: {
     flexDirection: "row",
-    gap: 24,
+    justifyContent: "space-between",
   },
   partyCol: {
     flex: 1,

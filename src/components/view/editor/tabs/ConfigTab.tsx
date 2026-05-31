@@ -27,7 +27,7 @@ export function ConfigTab() {
     docType != null ? getDocNoPrefix(docType, docDate) : "----";
 
   return (
-    <div className="mx-auto max-w-lg space-y-6 p-6">
+    <div className="mx-auto max-w-lg space-y-6 p-6 overflow-y-auto h-full">
       <div className="space-y-2">
         <Label>{t("CONFIG.DOC_LANGUAGE")}</Label>
         <Select

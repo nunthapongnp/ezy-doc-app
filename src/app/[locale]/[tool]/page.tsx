@@ -1,4 +1,4 @@
-import { DocumentEditor } from "@/components/editor/DocumentEditor";
+import { DocumentEditor } from "@/components/view/editor/DocumentEditor";
 import {
   DOCUMENT_ROUTES,
   LOCALES,
