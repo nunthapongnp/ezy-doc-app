@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Noto_Sans, Noto_Sans_Thai } from 'next/font/google';
+import localFont from 'next/font/local';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LanguageSwitcher } from '@/components/view/layout/LanguageSwitcher';
@@ -10,23 +10,78 @@ import '../globals.css';
 import { Toaster } from '@/components/ui/sonner';
 import Script from 'next/script';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { HOME_SEO, absoluteUrl, getOpenGraphImages, localeAlternates } from '@/lib/seo';
 
-const notoSans = Noto_Sans({
-    subsets: ['latin', 'latin-ext'],
-    weight: ['400', '500', '700'],
+const notoSans = localFont({
+    src: [
+        {
+            path: '../../../public/fonts/Noto_Sans/static/NotoSans-Regular.ttf',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../../../public/fonts/Noto_Sans/static/NotoSans-Bold.ttf',
+            weight: '700',
+            style: 'normal',
+        },
+    ],
     variable: '--font-noto-sans',
+    display: 'swap',
 });
 
-const notoSansThai = Noto_Sans_Thai({
-    subsets: ['latin', 'latin-ext'],
-    weight: ['400', '500', '700'],
-    variable: '--font-noto-sans',
+const notoSansThai = localFont({
+    src: [
+        {
+            path: '../../../public/fonts/Noto_Sans_Thai/static/NotoSansThai-Regular.ttf',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../../../public/fonts/Noto_Sans_Thai/static/NotoSansThai-Bold.ttf',
+            weight: '700',
+            style: 'normal',
+        },
+    ],
+    variable: '--font-noto-sans-thai',
+    display: 'swap',
 });
 
 export const metadata: Metadata = {
-    title: `${APP_NAME} — Free Quotation, Invoice & Receipt Generator`,
-    description:
-        'Create professional business documents instantly. Free PDF export, no sign-up required.',
+    metadataBase: new URL(absoluteUrl()),
+    title: {
+        default: HOME_SEO.en.title,
+        template: `%s | ${APP_NAME}`,
+    },
+    description: HOME_SEO.en.description,
+    applicationName: APP_NAME,
+    generator: 'Next.js',
+    keywords: HOME_SEO.en.keywords,
+    alternates: localeAlternates('en'),
+    openGraph: {
+        type: 'website',
+        siteName: APP_NAME,
+        title: HOME_SEO.en.title,
+        description: HOME_SEO.en.description,
+        url: absoluteUrl('/en'),
+        images: getOpenGraphImages(),
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: HOME_SEO.en.title,
+        description: HOME_SEO.en.description,
+        images: [absoluteUrl('/opengraph-image')],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': -1,
+        },
+    },
 };
 
 export function generateStaticParams() {

@@ -30,3 +30,4 @@ export const DOC_TYPE_TITLE_KEYS: Record<DocType, string> = {
 };
 
 export const APP_NAME = 'EZY-DOC';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ezy-doc.com';
