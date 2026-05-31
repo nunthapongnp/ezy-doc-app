@@ -29,4 +29,4 @@ export const DOC_TYPE_TITLE_KEYS: Record<DocType, string> = {
     RECEIPT: 'PDF.RECEIPT_TITLE',
 };
 
-export const APP_NAME = 'EZY-Doc';
+export const APP_NAME = 'EZY-DOC';

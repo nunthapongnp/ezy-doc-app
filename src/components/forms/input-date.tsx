@@ -109,7 +109,7 @@ export function InputDate({
             {label && (
                 <label
                     htmlFor={id}
-                    className="text-xs font-semibold tracking-widest uppercase text-muted-foreground select-none"
+                    className="text-xs" // font-semibold tracking-widest uppercase text-muted-foreground select-none
                 >
                     {label}
                 </label>

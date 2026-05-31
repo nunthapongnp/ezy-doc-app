@@ -17,13 +17,13 @@ const TOOLS = [
         descEn: 'Simple billing, faster payments.',
         descTh: 'ออกใบแจ้งหนี้ได้ทันที',
     },
-    {
-        nameKey: 'NAV.ACCEPTANCE',
-        slug: 'acceptance',
-        icon: ClipboardCheck,
-        descEn: 'Document work acceptance clearly.',
-        descTh: 'บันทึกการตรวจรับงาน',
-    },
+    // {
+    //     nameKey: 'NAV.ACCEPTANCE',
+    //     slug: 'acceptance',
+    //     icon: ClipboardCheck,
+    //     descEn: 'Document work acceptance clearly.',
+    //     descTh: 'บันทึกการตรวจรับงาน',
+    // },
     {
         nameKey: 'NAV.RECEIPT',
         slug: 'receipt',

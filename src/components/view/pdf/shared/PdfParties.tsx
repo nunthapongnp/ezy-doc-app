@@ -9,7 +9,15 @@ interface PdfPartiesProps {
     labels: PdfLabels;
 }
 
-function PartyBlock({ title, party }: { title: string; party: PartyInfo }) {
+function PartyBlock({
+    title,
+    party,
+    labels,
+}: {
+    title: string;
+    party: PartyInfo;
+    labels?: PdfLabels;
+}) {
     return (
         <View style={s.partyCol}>
             <Text style={s.partyTitle}>{title}</Text>
@@ -19,7 +27,7 @@ function PartyBlock({ title, party }: { title: string; party: PartyInfo }) {
                 {party.addressLine2 ? `\n${party.addressLine2}` : ''}
                 {party.email ? `\n${party.email}` : ''}
                 {party.phone ? `\n${party.phone}` : ''}
-                {party.taxId ? `\nTax ID: ${party.taxId}` : ''}
+                {party.taxId ? `\n${labels?.taxId ? labels.taxId : 'Tax ID'}: ${party.taxId}` : ''}
             </Text>
         </View>
     );
@@ -28,7 +36,7 @@ function PartyBlock({ title, party }: { title: string; party: PartyInfo }) {
 export function PdfParties({ vendor, customer, labels }: PdfPartiesProps) {
     return (
         <View style={[s.section, s.partiesRow]}>
-            <PartyBlock title={labels.vendor} party={vendor} />
+            <PartyBlock title={labels.vendor} party={vendor} labels={labels} />
             <PartyBlock title={labels.customer} party={customer} />
         </View>
     );

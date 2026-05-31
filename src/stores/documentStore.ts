@@ -20,7 +20,7 @@ interface DocumentStore {
     updateItem: (id: string, patch: Partial<LineItem>) => void;
     removeItem: (id: string) => void;
     setField: (key: keyof DocumentPatch, value: unknown) => void;
-    recalcTotals: (includeTax: boolean, taxRate: number) => void;
+    recalcTotals: (showTax: boolean, taxRate: number, showWht: boolean, whtRate: number) => void;
     reset: () => void;
 }
 
@@ -29,9 +29,11 @@ const defaultDocFields = (): Partial<DocumentState> => ({
     vendor: { ...EMPTY_PARTY },
     customer: { ...EMPTY_PARTY },
     items: [createEmptyLineItem()],
-    subTotal: 0,
-    taxAmount: 0,
-    total: 0,
+    subTotalAmt: 0,
+    taxAmt: 0,
+    totalAmt: 0,
+    whtAmt: 0,
+    netTotalAmt: 0,
     remark: '',
 });
 
@@ -75,7 +77,7 @@ export const useDocumentStore = create<DocumentStore>((set) => ({
                     const updated = { ...item, ...patch };
                     return {
                         ...updated,
-                        total: calcLineTotal(updated.qty, updated.unitPrice),
+                        totalAmt: calcLineTotal(updated.qty, updated.unitPrice),
                     };
                 }),
             },
@@ -89,14 +91,16 @@ export const useDocumentStore = create<DocumentStore>((set) => ({
             },
         })),
 
-    recalcTotals: (includeTax, taxRate) =>
+    recalcTotals: (showTax, taxRate, showWht, whtRate) =>
         set((s) => {
-            const { subTotal, taxAmount, total } = calcTotals(
+            const { subTotalAmt, taxAmt, totalAmt, whtAmt, netTotalAmt } = calcTotals(
                 s.doc.items ?? [],
-                includeTax,
+                showTax,
                 taxRate,
+                showWht,
+                whtRate,
             );
-            return { doc: { ...s.doc, subTotal, taxAmount, total } };
+            return { doc: { ...s.doc, subTotalAmt, taxAmt, totalAmt, whtAmt, netTotalAmt } };
         }),
 
     reset: () => set({ doc: defaultDocFields() }),

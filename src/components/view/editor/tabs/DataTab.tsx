@@ -26,8 +26,20 @@ export function DataTab({ docType }: DataTabProps) {
     const { vendor, setVendor: setVendorProfile } = useVendorStore();
 
     useEffect(() => {
-        recalcTotals(layout.footer.showTax, layout.footer.taxRate);
-    }, [layout.footer.showTax, layout.footer.taxRate, doc.items, recalcTotals]);
+        recalcTotals(
+            layout.footer.showTax,
+            layout.footer.taxRate,
+            layout.footer.showWht,
+            layout.footer.whtRate,
+        );
+    }, [
+        layout.footer.showTax,
+        layout.footer.taxRate,
+        layout.footer.showWht,
+        layout.footer.whtRate,
+        doc.items,
+        recalcTotals,
+    ]);
 
     const docDate = doc.docDate ?? new Date();
     const computedDocNo = computeDocNumber(docType, docDate, layout.header.docSeqNumber);

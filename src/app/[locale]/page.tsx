@@ -23,10 +23,10 @@ export async function generateMetadata({
             ? 'Create professional business documents instantly. Free PDF export, no sign-up required.'
             : 'สร้างเอกสารธุรกิจแบบมืออาชีพ ดาวน์โหลด PDF ฟรี ไม่ต้องสมัครสมาชิก',
         alternates: {
-            canonical: `https://ezydoc.app/${locale}`,
+            canonical: `https://ezy-doc.app/${locale}`,
             languages: {
-                en: 'https://ezydoc.app/en',
-                th: 'https://ezydoc.app/th',
+                en: 'https://ezy-doc.app/en',
+                th: 'https://ezy-doc.app/th',
             },
         },
     };

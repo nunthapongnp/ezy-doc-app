@@ -6,6 +6,9 @@ export interface PdfLabels {
     dueDate: string;
     vendor: string;
     customer: string;
+    taxId: string;
+    phone: string;
+    email: string;
     itemSeq: string;
     itemDesc: string;
     itemQty: string;

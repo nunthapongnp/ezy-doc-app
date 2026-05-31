@@ -2,10 +2,10 @@ import type { DocType } from '@/types/document';
 import type { PdfLabels } from '@/types/pdfLabels';
 
 const PDF_TITLE_KEY: Record<DocType, string> = {
-    QUOTATION: 'EDITOR.TAB.PREVIEW.TITLE.QUOTATION',
-    INVOICE: 'EDITOR.TAB.PREVIEW.TITLE.INVOICE',
-    ACCEPTANCE_CERT: 'EDITOR.TAB.PREVIEW.TITLE.ACCEPTANCE',
-    RECEIPT: 'EDITOR.TAB.PREVIEW.TITLE.RECEIPT',
+    QUOTATION: 'EDITOR.TAB.PREVIEW.PDF.TITLE.QUOTATION',
+    INVOICE: 'EDITOR.TAB.PREVIEW.PDF.TITLE.INVOICE',
+    ACCEPTANCE_CERT: 'EDITOR.TAB.PREVIEW.PDF.TITLE.ACCEPTANCE',
+    RECEIPT: 'EDITOR.TAB.PREVIEW.PDF.TITLE.RECEIPT',
 };
 
 export type TranslateFn = (key: string, params?: Record<string, string | number>) => string;
@@ -20,6 +20,9 @@ export function buildPdfLabels(t: TranslateFn, docType: DocType, taxRate: number
         dueDate: t('EDITOR.TAB.PREVIEW.DUE_DATE'),
         vendor: t('EDITOR.TAB.PREVIEW.VENDOR'),
         customer: t('EDITOR.TAB.PREVIEW.CUSTOMER'),
+        taxId: t('EDITOR.TAB.PREVIEW.TAX_ID'),
+        phone: t('EDITOR.TAB.PREVIEW.PHONE'),
+        email: t('EDITOR.TAB.PREVIEW.EMAIL'),
         itemSeq: t('EDITOR.TAB.PREVIEW.ITEM_SEQ'),
         itemDesc: t('EDITOR.TAB.PREVIEW.ITEM_DESC'),
         itemQty: t('EDITOR.TAB.PREVIEW.ITEM_QTY'),

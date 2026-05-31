@@ -63,7 +63,7 @@ export function PdfHeader({
                     </View>
                 ) : null}
             </View>
-            {logoDataUrl ? <Image src={logoDataUrl} style={s.logo} /> : null}
+            {logoDataUrl ? <Image src={logoDataUrl} style={s.logo} /> : <></>}
         </View>
     );
 }

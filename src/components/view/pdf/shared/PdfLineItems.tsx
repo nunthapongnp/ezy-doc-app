@@ -1,5 +1,5 @@
 import { Text, View } from '@react-pdf/renderer';
-import { formatCurrency } from '@/lib/calculations';
+import { formatCurrency, formatInt } from '@/lib/calculations';
 import { pdfStyles as s } from '@/lib/pdf/PdfStyles';
 import type { LineItem } from '@/types/document';
 import type { PdfLabels } from '@/types/pdfLabels';
@@ -22,9 +22,7 @@ export function PdfLineItems({ items, labels, layout }: PdfLineItemsProps) {
                 {layout.showSeq && (
                     <Text style={[s.colSeq, s.tableHeaderText]}>{labels.itemSeq}</Text>
                 )}
-                {layout.showDesc && (
-                    <Text style={[s.colDesc, s.tableHeaderText]}>{labels.itemDesc}</Text>
-                )}
+                <Text style={[s.colDesc, s.tableHeaderText]}>{labels.itemDesc}</Text>
                 {layout.showUnit && (
                     <Text style={[s.colUnit, s.tableHeaderText]}>{labels.itemUnit}</Text>
                 )}
@@ -37,20 +35,18 @@ export function PdfLineItems({ items, labels, layout }: PdfLineItemsProps) {
             {items.map((item, index) => (
                 <View key={item.id} style={s.tableRow}>
                     {layout.showSeq && <Text style={[s.colSeq, { fontSize: 9 }]}>{index + 1}</Text>}
-                    {layout.showDesc && (
-                        <View style={s.colDesc}>
-                            <Text style={{ fontWeight: 'bold', fontSize: 9 }}>{item.name}</Text>
-                            {item.desc ? (
-                                <Text style={{ fontSize: 8, color: '#64748b', marginTop: 2 }}>
-                                    {item.desc}
-                                </Text>
-                            ) : null}
-                        </View>
-                    )}
+                    <View style={s.colDesc}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 9 }}>{item.name}</Text>
+                        {layout.showDesc && item.desc ? (
+                            <Text style={{ fontSize: 8, color: '#64748b', marginTop: 2 }}>
+                                {item.desc}
+                            </Text>
+                        ) : null}
+                    </View>
                     {layout.showUnit && (
                         <Text style={[s.colUnit, { fontSize: 9 }]}>{item.unit}</Text>
                     )}
-                    <Text style={[s.colQty, { fontSize: 9 }]}>{item.qty}</Text>
+                    <Text style={[s.colQty, { fontSize: 9 }]}>{formatInt(item.qty)}</Text>
                     {layout.showUnitPrice && (
                         <Text style={[s.colPrice, { fontSize: 9 }]}>
                             {formatCurrency(item.unitPrice)}

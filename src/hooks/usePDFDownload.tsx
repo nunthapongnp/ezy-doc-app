@@ -4,7 +4,7 @@ import { pdf } from '@react-pdf/renderer';
 import { useVignetteAd } from '@/components/view/ads/VignetteAdTrigger';
 import { TEMPLATE_MAP } from '@/lib/pdf/templateMap';
 import { useDocumentSnapshot } from './useDocumentSnapshot';
-import { APP_NAME } from '@/lib/constants';
+import { format } from 'date-fns';
 
 export function usePDFDownload() {
     const { snapshot, labels } = useDocumentSnapshot();
@@ -21,7 +21,7 @@ export function usePDFDownload() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${APP_NAME}-${snapshot.docNo || snapshot.docType}.pdf`;
+        a.download = `EZYDoc_${snapshot.docNo || snapshot.docType}_${format(new Date(), 'yyyyMMddHHmmss')}.pdf`;
         a.click();
         URL.revokeObjectURL(url);
     };

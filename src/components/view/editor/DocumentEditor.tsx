@@ -39,9 +39,9 @@ const ClearFormAlert = ({ t, open, onOpenChange, clear }) => {
         <AlertDialog open={open} onOpenChange={onOpenChange}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>{t('EDITOR.CLEAR_FORM.ALERT_TITLE')}</AlertDialogTitle>
+                    <AlertDialogTitle>{t('EDITOR.CLEAR_FORM.ALERT.TITLE')}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        {t('EDITOR.CLEAR_FORM.ALERT_DESC')}
+                        {t('EDITOR.CLEAR_FORM.ALERT.DESC')}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -72,8 +72,19 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
     }, [docType, setDocType]);
 
     useEffect(() => {
-        recalcTotals(layout.footer.showTax, layout.footer.taxRate);
-    }, [layout.footer.showTax, layout.footer.taxRate, recalcTotals]);
+        recalcTotals(
+            layout.footer.showTax,
+            layout.footer.taxRate,
+            layout.footer.showWht,
+            layout.footer.whtRate,
+        );
+    }, [
+        layout.footer.showTax,
+        layout.footer.taxRate,
+        layout.footer.showWht,
+        layout.footer.whtRate,
+        recalcTotals,
+    ]);
 
     const tabs: { id: EditorTab; label: string }[] = [
         { id: 'layout', label: t('EDITOR.TAB.LAYOUT.TITLE') },
@@ -136,7 +147,7 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
                                 {t('EDITOR.EXPORT_PDF')}
                             </Button>
                         </div>
-                        <AdFreeTeaser />
+                        {/* <AdFreeTeaser /> */}
                     </div>
                     <SidebarAd />
                 </div>
