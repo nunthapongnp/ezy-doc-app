@@ -6,7 +6,7 @@ import type { NextConfig } from 'next';
 loadEnvConfig(path.join(process.cwd(), 'environment'));
 
 const nextConfig: NextConfig = {
-    output: 'export',
+    output: 'standalone',
     trailingSlash: true,
     images: {
         unoptimized: true,

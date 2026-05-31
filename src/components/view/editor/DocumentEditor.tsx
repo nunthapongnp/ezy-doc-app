@@ -149,7 +149,7 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
                         </div>
                         {/* <AdFreeTeaser /> */}
                     </div>
-                    <SidebarAd />
+                    {/* <SidebarAd /> */}
                 </div>
             </div>
             <ClearFormAlert

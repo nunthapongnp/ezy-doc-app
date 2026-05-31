@@ -8,6 +8,8 @@ import { APP_NAME, LOCALES, type AppLocale } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import '../globals.css';
 import { Toaster } from '@/components/ui/sonner';
+import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const notoSans = Noto_Sans({
     subsets: ['latin', 'latin-ext'],
@@ -46,6 +48,16 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
+            <head>
+                {process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
+                    <Script
+                        async
+                        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
+                        strategy="afterInteractive"
+                    />
+                )}
+                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
+            </head>
             <body
                 className={cn(
                     'min-h-screen bg-background font-sans antialiased',
