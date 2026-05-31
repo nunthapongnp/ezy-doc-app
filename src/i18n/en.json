@@ -1,126 +1,126 @@
 {
-  "ADS": {
-    "PRO_LINK": "EZY-Doc Pro — No ads, cloud save, share links",
-    "REMOVE_ADS": "Tired of ads?"
-  },
-  "ALL": {
-    "CANCEL": "Cancel",
-    "CONTINUE": "Continue",
-    "DOWNLOAD": "Download",
-    "FILE": {
-      "COMPRESSING": "Compressing...",
-      "DRAG_AND_DROP": "Drag & drop logo here or click to browse",
-      "DROP_HERE": "Drop the logo here..."
+    "ADS": {
+        "PRO_LINK": "EZY-Doc Pro — No ads, cloud save, share links",
+        "REMOVE_ADS": "Tired of ads?"
     },
-    "LOGO": {
-      "ERROR": "Compression failed. Try a smaller image.",
-      "UPLOADED": "Logo uploaded"
+    "ALL": {
+        "CANCEL": "Cancel",
+        "CONTINUE": "Continue",
+        "DOWNLOAD": "Download",
+        "FILE": {
+            "COMPRESSING": "Compressing...",
+            "DRAG_AND_DROP": "Drag & drop logo here or click to browse",
+            "DROP_HERE": "Drop the logo here..."
+        },
+        "LOGO": {
+            "ERROR": "Compression failed. Try a smaller image.",
+            "UPLOADED": "Logo uploaded"
+        },
+        "SAVE": "Save"
     },
-    "SAVE": "Save"
-  },
-  "EDITOR": {
-    "CLEAR_FORM": "Clear Data",
-    "CLEAR_FORM.ALERT.DESC": "This will clear all document data and reset the form. This action cannot be undone.",
-    "CLEAR_FORM.ALERT.TITLE": "Are you sure you want to clear data?",
-    "EXPORT_PDF": "Download PDF",
-    "TAB": {
-      "DATA": {
-        "ADD_ITEM": "Add item",
-        "ADDRESS_LINE_1": "Address line 1",
-        "ADDRESS_LINE_2": "Address line 2",
-        "CUSTOMER": "Customer",
-        "CUSTOMER_NAME": "Customer name",
-        "DOC_DATE": "Document date",
-        "DOC_NO": "Document No.",
-        "DUE_DATE": "Due date",
-        "EMAIL": "Email",
-        "ITEM_DESC": "Description",
-        "ITEM_NAME": "Item name",
-        "ITEM_QTY": "Qty",
-        "ITEM_UNIT": "Unit",
-        "ITEM_UNIT_PRICE": "Unit price",
-        "LOGO": "Logo",
-        "PAYMENT_METHOD": "Payment method",
-        "PHONE": "Phone",
-        "REF_NO": "Reference No.",
-        "REMARK": "Notes / Payment terms",
-        "TAX_ID": "Tax ID",
-        "TITLE": "Data",
-        "UPLOAD_LOGO": "Upload logo",
-        "VENDOR": "Vendor",
-        "VENDOR_NAME": "Seller name"
-      },
-      "LAYOUT": {
-        "CALCULATION": {
-          "SHOW": {
-            "TAX": "Tax",
-            "WHT": "Withholding tax"
-          },
-          "TITLE": "Calculation"
-        },
-        "DOC_FOOTER": {
-          "SHOW": {
-            "PAYMENT_METHOD": "Payment method",
-            "REMARK": "Notes"
-          },
-          "TITLE": "Document footer"
-        },
-        "DOC_INFO": {
-          "SHOW": {
-            "DOC_DATE": "Document date",
-            "DOC_DUE_DATE": "Due date",
-            "DOC_NO": "Document No.",
-            "REF_NO": "Reference No."
-          },
-          "TITLE": "Document info"
-        },
-        "DOC_LANGUAGE": "Document language",
-        "ITEM_DESC": {
-          "SHOW": {
-            "ITEM_DESC": "Description",
-            "ITEM_SEQ": "Item No.",
-            "ITEM_UNIT": "Unit",
-            "ITEM_UNIT_PRICE": "Unit price"
-          },
-          "TITLE": "Line items"
-        },
-        "TITLE": "Layout"
-      },
-      "PREVIEW": {
-        "CUSTOMER": "Customer",
-        "TAX_ID": "Tax ID",
-        "EMAIL": "Email",
-        "PHONE": "Phone No.",
-        "DOC_DATE": "Date",
-        "DOC_NO": "Document No.",
-        "DUE_DATE": "Due date",
-        "ITEM_DESC": "Description",
-        "ITEM_QTY": "Qty",
-        "ITEM_SEQ": "No.",
-        "ITEM_TOTAL_AMT": "Amount",
-        "ITEM_UNIT": "Unit",
-        "ITEM_UNIT_PRICE": "Unit price",
-        "NET_TOTAL_AMT": "Net total",
-        "PDF": {
-          "TITLE": {
-            "ACCEPTANCE": "Acceptance Certificate",
-            "INVOICE": "Invoice",
-            "QUOTATION": "Quotation",
-            "RECEIPT": "Receipt"
-          }
-        },
-        "REF_NO": "Reference No.",
-        "REMARK": "Notes",
-        "SUB_TOTAL_AMT": "Subtotal",
-        "TAX_AMT": "Tax ({taxRate}%)",
-        "TITLE": "Preview",
-        "TOTAL_AMT": "Total",
-        "VENDOR": "Vendor",
-        "WHT_AMT": "Withholding tax"
-      }
+    "EDITOR": {
+        "CLEAR_FORM": "Clear Data",
+        "CLEAR_FORM.ALERT.DESC": "This will clear all document data and reset the form. This action cannot be undone.",
+        "CLEAR_FORM.ALERT.TITLE": "Are you sure you want to clear data?",
+        "EXPORT_PDF": "Download PDF",
+        "TAB": {
+            "DATA": {
+                "ADD_ITEM": "Add item",
+                "ADDRESS_LINE_1": "Address line 1",
+                "ADDRESS_LINE_2": "Address line 2",
+                "CUSTOMER": "Customer",
+                "CUSTOMER_NAME": "Customer name",
+                "DOC_DATE": "Document date",
+                "DOC_NO": "Document No.",
+                "DUE_DATE": "Due date",
+                "EMAIL": "Email",
+                "ITEM_DESC": "Description",
+                "ITEM_NAME": "Item name",
+                "ITEM_QTY": "Qty",
+                "ITEM_UNIT": "Unit",
+                "ITEM_UNIT_PRICE": "Unit price",
+                "LOGO": "Logo",
+                "PAYMENT_METHOD": "Payment method",
+                "PHONE": "Phone",
+                "REF_NO": "Reference No.",
+                "REMARK": "Notes / Payment terms",
+                "TAX_ID": "Tax ID",
+                "TITLE": "Data",
+                "UPLOAD_LOGO": "Upload logo",
+                "VENDOR": "Vendor",
+                "VENDOR_NAME": "Seller name"
+            },
+            "LAYOUT": {
+                "CALCULATION": {
+                    "SHOW": {
+                        "TAX": "Tax",
+                        "WHT": "Withholding tax"
+                    },
+                    "TITLE": "Calculation"
+                },
+                "DOC_FOOTER": {
+                    "SHOW": {
+                        "PAYMENT_METHOD": "Payment method",
+                        "REMARK": "Notes"
+                    },
+                    "TITLE": "Document footer"
+                },
+                "DOC_INFO": {
+                    "SHOW": {
+                        "DOC_DATE": "Document date",
+                        "DOC_DUE_DATE": "Due date",
+                        "DOC_NO": "Document No.",
+                        "REF_NO": "Reference No."
+                    },
+                    "TITLE": "Document info"
+                },
+                "DOC_LANGUAGE": "Document language",
+                "ITEM_DESC": {
+                    "SHOW": {
+                        "ITEM_DESC": "Description",
+                        "ITEM_SEQ": "Item No.",
+                        "ITEM_UNIT": "Unit",
+                        "ITEM_UNIT_PRICE": "Unit price"
+                    },
+                    "TITLE": "Line items"
+                },
+                "TITLE": "Layout"
+            },
+            "PREVIEW": {
+                "CUSTOMER": "Customer",
+                "TAX_ID": "Tax ID",
+                "EMAIL": "Email",
+                "PHONE": "Phone No.",
+                "DOC_DATE": "Date",
+                "DOC_NO": "Document No.",
+                "DUE_DATE": "Due date",
+                "ITEM_DESC": "Description",
+                "ITEM_QTY": "Qty",
+                "ITEM_SEQ": "No.",
+                "ITEM_TOTAL_AMT": "Amount",
+                "ITEM_UNIT": "Unit",
+                "ITEM_UNIT_PRICE": "Unit price",
+                "NET_TOTAL_AMT": "Net total",
+                "PDF": {
+                    "TITLE": {
+                        "ACCEPTANCE": "Acceptance Certificate",
+                        "INVOICE": "Invoice",
+                        "QUOTATION": "Quotation",
+                        "RECEIPT": "Receipt"
+                    }
+                },
+                "REF_NO": "Reference No.",
+                "REMARK": "Notes",
+                "SUB_TOTAL_AMT": "Subtotal",
+                "TAX_AMT": "Tax ({taxRate}%)",
+                "TITLE": "Preview",
+                "TOTAL_AMT": "Total",
+                "VENDOR": "Vendor",
+                "WHT_AMT": "Withholding tax"
+            }
+        }
+    },
+    "WARNING": {
+        "SESSION_ONLY": "Your document is not saved. Export PDF before leaving this page."
     }
-  },
-  "WARNING": {
-    "SESSION_ONLY": "Your document is not saved. Export PDF before leaving this page."
-  }
 }
