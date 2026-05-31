@@ -5,6 +5,7 @@ import { useVignetteAd } from '@/components/view/ads/VignetteAdTrigger';
 import { TEMPLATE_MAP } from '@/lib/pdf/templateMap';
 import { useDocumentSnapshot } from './useDocumentSnapshot';
 import { format } from 'date-fns';
+import { trackEvent } from '@/lib/google';
 
 export function usePDFDownload() {
     const { snapshot, labels } = useDocumentSnapshot();
@@ -14,6 +15,10 @@ export function usePDFDownload() {
         if (!snapshot || !labels) return;
 
         triggerVignette('export_pdf_click');
+        trackEvent('export_pdf', {
+            event_category: 'document',
+            document_type: snapshot.docType,
+        });
 
         const Template = TEMPLATE_MAP[snapshot.docType];
         const blob = await pdf(<Template data={snapshot} labels={labels} />).toBlob();

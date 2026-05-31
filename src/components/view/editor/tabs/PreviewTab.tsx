@@ -6,6 +6,7 @@ import { registerPdfFonts } from '@/lib/pdf/fontFamily';
 import { TEMPLATE_MAP } from '@/lib/pdf/templateMap';
 import { useVignetteAd } from '@/components/view/ads/VignetteAdTrigger';
 import { useDocumentSnapshot } from '@/hooks/useDocumentSnapshot';
+import { trackEvent } from '@/lib/google';
 
 registerPdfFonts();
 
@@ -22,7 +23,9 @@ export function PreviewTab({ isActive }: PreviewTabProps) {
     const { triggerVignette } = useVignetteAd();
 
     useEffect(() => {
-        if (isActive) triggerVignette('preview_tab_open');
+        if (!isActive) return;
+        triggerVignette('preview_tab_open');
+        trackEvent('preview_document', { event_category: 'document' });
     }, [isActive, triggerVignette]);
 
     if (!snapshot || !labels) {

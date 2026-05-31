@@ -1,8 +1,8 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-
-const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_ID;
+import { ADSENSE_SIDEBAR_SLOT } from '@/lib/google';
+import { AdSenseAd } from './AdSenseAd';
 
 interface SidebarAdProps {
     /** Desktop sidebar only — hidden below `lg`. */
@@ -10,6 +10,8 @@ interface SidebarAdProps {
 }
 
 export function SidebarAd({ className }: SidebarAdProps) {
+    if (!ADSENSE_SIDEBAR_SLOT) return null;
+
     return (
         <aside
             className={cn(
@@ -20,21 +22,14 @@ export function SidebarAd({ className }: SidebarAdProps) {
             aria-label="Advertisement"
         >
             <div className="sticky top-20 w-full">
-                <div className="relative aspect-6/5 w-full max-w-[300px] overflow-hidden rounded-md border border-dashed border-muted-foreground/25 bg-muted/30">
-                    {ADSENSE_CLIENT ? (
-                        <ins
-                            className="adsbygoogle block h-full w-full"
-                            style={{ display: 'block' }}
-                            data-ad-client={ADSENSE_CLIENT}
-                            data-ad-slot=""
-                            data-ad-format="auto"
-                            data-full-width-responsive="true"
-                        />
-                    ) : (
-                        <div className="flex h-full min-h-[200px] items-center justify-center px-2 text-center text-xs text-muted-foreground">
-                            Ad space (300×250)
-                        </div>
-                    )}
+                <div className="relative aspect-6/5 w-full max-w-[300px] overflow-hidden rounded-md bg-muted/30">
+                    <AdSenseAd
+                        slot={ADSENSE_SIDEBAR_SLOT}
+                        className="h-full w-full"
+                        style={{ minHeight: 250 }}
+                        format="rectangle"
+                        fullWidthResponsive={false}
+                    />
                 </div>
             </div>
         </aside>

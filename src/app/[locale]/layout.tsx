@@ -8,9 +8,8 @@ import { APP_NAME, LOCALES, type AppLocale } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import '../globals.css';
 import { Toaster } from '@/components/ui/sonner';
-import Script from 'next/script';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import { HOME_SEO, absoluteUrl, getOpenGraphImages, localeAlternates } from '@/lib/seo';
+import { GoogleServices } from '@/components/google/GoogleServices';
 
 const notoSans = localFont({
     src: [
@@ -103,16 +102,6 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale} data-scroll-behavior="smooth" suppressHydrationWarning>
-            <head>
-                {process.env.NEXT_PUBLIC_ADSENSE_CLIENT && (
-                    <Script
-                        async
-                        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
-                        strategy="afterInteractive"
-                    />
-                )}
-                <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID!} />
-            </head>
             <body
                 className={cn(
                     'min-h-screen bg-background font-sans antialiased',
@@ -122,6 +111,7 @@ export default async function LocaleLayout({
                     notoSansThai.className,
                 )}
             >
+                <GoogleServices />
                 <TolgeeNextProvider locale={locale as AppLocale}>
                     <Toaster />
                     <div className="relative flex min-h-screen flex-col">

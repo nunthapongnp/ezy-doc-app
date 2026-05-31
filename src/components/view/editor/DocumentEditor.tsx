@@ -5,7 +5,6 @@ import { useTranslate } from '@tolgee/react';
 import { Download, RotateCcw } from 'lucide-react';
 import { BannerAd } from '@/components/view/ads/BannerAd';
 import { SidebarAd } from '@/components/view/ads/SidebarAd';
-import { AdFreeTeaser } from '@/components/view/layout/AdFreeTeaser';
 import { SessionWarningBanner } from '@/components/view/layout/SessionWarningBanner';
 import { Button } from '@/components/ui/button';
 import { routeToDocType, type DocumentRoute } from '@/lib/constants';
@@ -106,7 +105,6 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
                 <SessionWarningBanner />
                 <BannerAd />
                 <div className="flex min-h-0 flex-1 overflow-hidden">
-                    {/* <SidebarAd /> */}
                     <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
                         <Tabs defaultValue="layout" className="h-full overflow-scroll">
                             <TabsList
@@ -147,7 +145,6 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
                                 {t('EDITOR.EXPORT_PDF')}
                             </Button>
                         </div>
-                        {/* <AdFreeTeaser /> */}
                     </div>
                     {/* <SidebarAd /> */}
                 </div>
