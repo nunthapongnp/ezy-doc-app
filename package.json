@@ -4,12 +4,13 @@
     "private": true,
     "scripts": {
         "dev": "bun --env-file=environment/.env.development.local next dev",
-        "build": "next build",
+        "build": "opennextjs-cloudflare build",
+        "build:next": "next build",
         "test": "vitest run",
         "test:watch": "vitest",
         "format": "npx prettier . --write",
-        "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-        "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+        "preview": "bun run build && opennextjs-cloudflare preview",
+        "deploy": "bun run build && opennextjs-cloudflare deploy",
         "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
     },
     "dependencies": {
