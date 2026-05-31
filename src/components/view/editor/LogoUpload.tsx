@@ -29,11 +29,10 @@ export function LogoUpload() {
     return (
         <div className="space-y-2">
             <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                {t('EDITOR.LOGO')}
+                {t('EDITOR.TAB.DATA.LOGO')}
             </Label>
             <div className="flex items-center gap-3">
                 {vendor.logoDataUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
                     <img
                         src={vendor.logoDataUrl}
                         alt=""
@@ -59,7 +58,7 @@ export function LogoUpload() {
                             <Loader2 className="size-3 animate-spin" /> Compressing…
                         </span>
                     ) : (
-                        'Upload logo'
+                        t('EDITOR.TAB.DATA.UPLOAD_LOGO')
                     )}
                 </label>
             </div>

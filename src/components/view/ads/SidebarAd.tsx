@@ -20,7 +20,7 @@ export function SidebarAd({ className }: SidebarAdProps) {
             aria-label="Advertisement"
         >
             <div className="sticky top-20 w-full">
-                <div className="relative aspect-[6/5] w-full max-w-[300px] overflow-hidden rounded-md border border-dashed border-muted-foreground/25 bg-muted/30">
+                <div className="relative aspect-6/5 w-full max-w-[300px] overflow-hidden rounded-md border border-dashed border-muted-foreground/25 bg-muted/30">
                     {ADSENSE_CLIENT ? (
                         <ins
                             className="adsbygoogle block h-full w-full"

@@ -4,6 +4,7 @@ import { pdf } from '@react-pdf/renderer';
 import { useVignetteAd } from '@/components/view/ads/VignetteAdTrigger';
 import { TEMPLATE_MAP } from '@/lib/pdf/templateMap';
 import { useDocumentSnapshot } from './useDocumentSnapshot';
+import { APP_NAME } from '@/lib/constants';
 
 export function usePDFDownload() {
     const { snapshot, labels } = useDocumentSnapshot();
@@ -20,7 +21,7 @@ export function usePDFDownload() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${snapshot.docNo || snapshot.docType}.pdf`;
+        a.download = `${APP_NAME}-${snapshot.docNo || snapshot.docType}.pdf`;
         a.click();
         URL.revokeObjectURL(url);
     };

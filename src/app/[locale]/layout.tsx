@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { Noto_Sans } from 'next/font/google';
+import { Noto_Sans, Noto_Sans_Thai } from 'next/font/google';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { LanguageSwitcher } from '@/components/view/core/LanguageSwitcher';
+import { LanguageSwitcher } from '@/components/view/layout/LanguageSwitcher';
 import { TolgeeNextProvider } from '@/lib/tolgee/client';
 import { APP_NAME, LOCALES, type AppLocale } from '@/lib/constants';
 import { cn } from '@/lib/utils';
@@ -10,6 +10,12 @@ import '../globals.css';
 import { Toaster } from '@/components/ui/sonner';
 
 const notoSans = Noto_Sans({
+    subsets: ['latin', 'latin-ext'],
+    weight: ['400', '500', '700'],
+    variable: '--font-noto-sans',
+});
+
+const notoSansThai = Noto_Sans_Thai({
     subsets: ['latin', 'latin-ext'],
     weight: ['400', '500', '700'],
     variable: '--font-noto-sans',
@@ -45,6 +51,8 @@ export default async function LocaleLayout({
                     'min-h-screen bg-background font-sans antialiased',
                     notoSans.variable,
                     notoSans.className,
+                    notoSansThai.variable,
+                    notoSansThai.className,
                 )}
             >
                 <TolgeeNextProvider locale={locale as AppLocale}>

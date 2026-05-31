@@ -7,35 +7,57 @@ import type { PdfLabels } from '@/types/pdfLabels';
 interface PdfLineItemsProps {
     items: LineItem[];
     labels: PdfLabels;
+    layout: {
+        showSeq?: boolean;
+        showDesc?: boolean;
+        showUnit?: boolean;
+        showUnitPrice?: boolean;
+    };
 }
 
-export function PdfLineItems({ items, labels }: PdfLineItemsProps) {
+export function PdfLineItems({ items, labels, layout }: PdfLineItemsProps) {
     return (
         <View style={s.section}>
             <View style={s.tableHeader}>
-                <Text style={[s.colDesc, s.tableHeaderText]}>{labels.description}</Text>
-                <Text style={[s.colUnit, s.tableHeaderText]}>{labels.unit}</Text>
-                <Text style={[s.colQty, s.tableHeaderText]}>{labels.qty}</Text>
-                <Text style={[s.colPrice, s.tableHeaderText]}>{labels.unitPrice}</Text>
-                <Text style={[s.colAmount, s.tableHeaderText]}>{labels.amount}</Text>
+                {layout.showSeq && (
+                    <Text style={[s.colSeq, s.tableHeaderText]}>{labels.itemSeq}</Text>
+                )}
+                {layout.showDesc && (
+                    <Text style={[s.colDesc, s.tableHeaderText]}>{labels.itemDesc}</Text>
+                )}
+                {layout.showUnit && (
+                    <Text style={[s.colUnit, s.tableHeaderText]}>{labels.itemUnit}</Text>
+                )}
+                <Text style={[s.colQty, s.tableHeaderText]}>{labels.itemQty}</Text>
+                {layout.showUnitPrice && (
+                    <Text style={[s.colPrice, s.tableHeaderText]}>{labels.itemUnitPrice}</Text>
+                )}
+                <Text style={[s.colAmount, s.tableHeaderText]}>{labels.itemTotalAmt}</Text>
             </View>
-            {items.map((item) => (
+            {items.map((item, index) => (
                 <View key={item.id} style={s.tableRow}>
-                    <View style={s.colDesc}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 9 }}>{item.name}</Text>
-                        {item.desc ? (
-                            <Text style={{ fontSize: 8, color: '#64748b', marginTop: 2 }}>
-                                {item.desc}
-                            </Text>
-                        ) : null}
-                    </View>
-                    <Text style={[s.colUnit, { fontSize: 9 }]}>{item.unit}</Text>
+                    {layout.showSeq && <Text style={[s.colSeq, { fontSize: 9 }]}>{index + 1}</Text>}
+                    {layout.showDesc && (
+                        <View style={s.colDesc}>
+                            <Text style={{ fontWeight: 'bold', fontSize: 9 }}>{item.name}</Text>
+                            {item.desc ? (
+                                <Text style={{ fontSize: 8, color: '#64748b', marginTop: 2 }}>
+                                    {item.desc}
+                                </Text>
+                            ) : null}
+                        </View>
+                    )}
+                    {layout.showUnit && (
+                        <Text style={[s.colUnit, { fontSize: 9 }]}>{item.unit}</Text>
+                    )}
                     <Text style={[s.colQty, { fontSize: 9 }]}>{item.qty}</Text>
-                    <Text style={[s.colPrice, { fontSize: 9 }]}>
-                        {formatCurrency(item.unitPrice)}
-                    </Text>
+                    {layout.showUnitPrice && (
+                        <Text style={[s.colPrice, { fontSize: 9 }]}>
+                            {formatCurrency(item.unitPrice)}
+                        </Text>
+                    )}
                     <Text style={[s.colAmount, { fontSize: 9, fontWeight: 'bold' }]}>
-                        {formatCurrency(item.total)}
+                        {formatCurrency(item.totalAmt)}
                     </Text>
                 </View>
             ))}

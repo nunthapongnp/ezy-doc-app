@@ -6,84 +6,67 @@ import { Plus, Trash2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { LogoUpload } from '@/components/view/logo/LogoUpload';
+import { LogoUpload } from '@/components/view/editor/LogoUpload';
 import { computeDocNumber } from '@/lib/docNumber';
-import { useConfigStore } from '@/stores/configStore';
+import { useLayoutStore } from '@/stores/layoutStore';
 import { useDocumentStore } from '@/stores/documentStore';
 import { useVendorStore } from '@/stores/vendorStore';
 import type { DocType } from '@/types/document';
+import { InputDate } from '../../../forms/input-date';
 
-function formatDateInput(d: Date | undefined): string {
-    if (!d || Number.isNaN(d.getTime())) return '';
-    return d.toISOString().split('T')[0];
-}
-
-interface EditTabProps {
+interface DataTabProps {
     docType: DocType;
 }
 
-export function EditTab({ docType }: EditTabProps) {
+export function DataTab({ docType }: DataTabProps) {
     const { t } = useTranslate();
-    const { config } = useConfigStore();
+    const { layout } = useLayoutStore();
     const { doc, setField, setVendor, setCustomer, addItem, updateItem, removeItem, recalcTotals } =
         useDocumentStore();
     const { vendor, setVendor: setVendorProfile } = useVendorStore();
 
     useEffect(() => {
-        recalcTotals(config.includeTax, config.taxRate);
-    }, [config.includeTax, config.taxRate, doc.items, recalcTotals]);
+        recalcTotals(layout.footer.showTax, layout.footer.taxRate);
+    }, [layout.footer.showTax, layout.footer.taxRate, doc.items, recalcTotals]);
 
     const docDate = doc.docDate ?? new Date();
-    const computedDocNo = computeDocNumber(docType, docDate, config.seqNumber);
+    const computedDocNo = computeDocNumber(docType, docDate, layout.header.docSeqNumber);
     const isReceipt = docType === 'RECEIPT';
 
     return (
-        <div className="mx-auto max-w-3xl space-y-6 p-6 overflow-y-auto h-full">
+        <div className="mx-auto min-w-3xl max-w-3xl space-y-6 p-6 overflow-y-auto h-full">
             <LogoUpload />
 
             <div className="grid gap-4 sm:grid-cols-2">
-                {config.showDocNo && (
+                {layout.header.showDocNo && (
                     <div className="space-y-1">
-                        <Label className="text-xs">{t('EDITOR.DOC_NO')}</Label>
+                        <Label className="text-xs">{t('EDITOR.TAB.DATA.DOC_NO')}</Label>
                         <Input value={computedDocNo} readOnly className="bg-muted font-mono" />
                     </div>
                 )}
                 <div className="space-y-1">
-                    <Label className="text-xs">{t('EDITOR.REF_NO')}</Label>
+                    <Label className="text-xs">{t('EDITOR.TAB.DATA.REF_NO')}</Label>
                     <Input
                         value={doc.refNo ?? ''}
                         onChange={(e) => setField('refNo', e.target.value)}
                     />
                 </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-1">
-                    <Label className="text-xs">{t('EDITOR.DOC_DATE')}</Label>
-                    <Input
-                        type="date"
-                        value={formatDateInput(doc.docDate)}
-                        onChange={(e) =>
-                            setField(
-                                'docDate',
-                                e.target.value ? new Date(e.target.value) : new Date(),
-                            )
-                        }
+                    <InputDate
+                        label={t('EDITOR.TAB.DATA.DOC_DATE')}
+                        value={doc.docDate}
+                        onChange={(date) => setField('docDate', date)}
                     />
                 </div>
                 {!isReceipt && (
                     <div className="space-y-1">
-                        <Label className="text-xs">
-                            {docType === 'QUOTATION'
-                                ? t('EDITOR.EXPIRY_DATE')
-                                : t('EDITOR.DUE_DATE')}
-                        </Label>
-                        <Input
-                            type="date"
-                            value={formatDateInput(
-                                docType === 'QUOTATION' ? doc.expiryDate : doc.dueDate,
-                            )}
-                            onChange={(e) => {
-                                const d = e.target.value ? new Date(e.target.value) : undefined;
-                                setField(docType === 'QUOTATION' ? 'expiryDate' : 'dueDate', d);
-                            }}
+                        <InputDate
+                            label={t('EDITOR.TAB.DATA.DUE_DATE')}
+                            value={doc.dueDate}
+                            onChange={(date) => setField('dueDate', date)}
                         />
                     </div>
                 )}
@@ -91,11 +74,11 @@ export function EditTab({ docType }: EditTabProps) {
 
             <section className="space-y-3 border-t pt-4">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    {t('EDITOR.VENDOR')}
+                    {t('EDITOR.TAB.DATA.VENDOR')}
                 </h3>
                 <div className="grid gap-2 sm:grid-cols-2">
                     <Input
-                        placeholder="Business name"
+                        placeholder={t('EDITOR.TAB.DATA.VENDOR_NAME')}
                         value={vendor.businessName}
                         onChange={(e) => {
                             setVendorProfile({ businessName: e.target.value });
@@ -103,7 +86,7 @@ export function EditTab({ docType }: EditTabProps) {
                         }}
                     />
                     <Input
-                        placeholder="Tax ID"
+                        placeholder={t('EDITOR.TAB.DATA.TAX_ID')}
                         value={vendor.taxId}
                         onChange={(e) => {
                             setVendorProfile({ taxId: e.target.value });
@@ -111,7 +94,7 @@ export function EditTab({ docType }: EditTabProps) {
                         }}
                     />
                     <Input
-                        placeholder="Address line 1"
+                        placeholder={t('EDITOR.TAB.DATA.ADDRESS_LINE_1')}
                         value={vendor.addressLine1}
                         onChange={(e) => {
                             setVendorProfile({ addressLine1: e.target.value });
@@ -120,7 +103,7 @@ export function EditTab({ docType }: EditTabProps) {
                         className="sm:col-span-2"
                     />
                     <Input
-                        placeholder="Address line 2"
+                        placeholder={t('EDITOR.TAB.DATA.ADDRESS_LINE_2')}
                         value={vendor.addressLine2}
                         onChange={(e) => {
                             setVendorProfile({ addressLine2: e.target.value });
@@ -129,7 +112,7 @@ export function EditTab({ docType }: EditTabProps) {
                         className="sm:col-span-2"
                     />
                     <Input
-                        placeholder="Email"
+                        placeholder={t('EDITOR.TAB.DATA.EMAIL')}
                         value={vendor.email}
                         onChange={(e) => {
                             setVendorProfile({ email: e.target.value });
@@ -137,7 +120,7 @@ export function EditTab({ docType }: EditTabProps) {
                         }}
                     />
                     <Input
-                        placeholder="Phone"
+                        placeholder={t('EDITOR.TAB.DATA.PHONE')}
                         value={vendor.phone}
                         onChange={(e) => {
                             setVendorProfile({ phone: e.target.value });
@@ -149,34 +132,34 @@ export function EditTab({ docType }: EditTabProps) {
 
             <section className="space-y-3 border-t pt-4">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    {t('EDITOR.CUSTOMER')}
+                    {t('EDITOR.TAB.DATA.CUSTOMER')}
                 </h3>
                 <div className="grid gap-2 sm:grid-cols-2">
                     <Input
-                        placeholder="Name"
+                        placeholder={t('EDITOR.TAB.DATA.CUSTOMER_NAME')}
                         value={doc.customer?.name ?? ''}
                         onChange={(e) => setCustomer({ name: e.target.value })}
                         className="sm:col-span-2"
                     />
                     <Input
-                        placeholder="Address line 1"
+                        placeholder={t('EDITOR.TAB.DATA.ADDRESS_LINE_1')}
                         value={doc.customer?.addressLine1 ?? ''}
                         onChange={(e) => setCustomer({ addressLine1: e.target.value })}
                         className="sm:col-span-2"
                     />
                     <Input
-                        placeholder="Address line 2"
+                        placeholder={t('EDITOR.TAB.DATA.ADDRESS_LINE_2')}
                         value={doc.customer?.addressLine2 ?? ''}
                         onChange={(e) => setCustomer({ addressLine2: e.target.value })}
                         className="sm:col-span-2"
                     />
                     <Input
-                        placeholder="Email"
+                        placeholder={t('EDITOR.TAB.DATA.EMAIL')}
                         value={doc.customer?.email ?? ''}
                         onChange={(e) => setCustomer({ email: e.target.value })}
                     />
                     <Input
-                        placeholder="Phone"
+                        placeholder={t('EDITOR.TAB.DATA.PHONE')}
                         value={doc.customer?.phone ?? ''}
                         onChange={(e) => setCustomer({ phone: e.target.value })}
                     />
@@ -185,13 +168,13 @@ export function EditTab({ docType }: EditTabProps) {
 
             <section className="space-y-3 border-t pt-4">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                    {t('EDITOR.ITEM_DESC')}
+                    {t('EDITOR.TAB.DATA.ITEM_DESC')}
                 </h3>
                 {(doc.items ?? []).map((item) => (
                     <div key={item.id} className="space-y-2 rounded-lg border bg-muted/20 p-3">
                         <div className="flex gap-2">
                             <Input
-                                placeholder="Item name"
+                                placeholder={t('EDITOR.TAB.DATA.ITEM_NAME')}
                                 value={item.name}
                                 onChange={(e) => updateItem(item.id, { name: e.target.value })}
                                 className="flex-1"
@@ -206,20 +189,20 @@ export function EditTab({ docType }: EditTabProps) {
                             </button>
                         </div>
                         <Input
-                            placeholder="Description"
+                            placeholder={t('EDITOR.TAB.DATA.ITEM_DESC')}
                             value={item.desc ?? ''}
                             onChange={(e) => updateItem(item.id, { desc: e.target.value })}
                         />
                         <div className="grid grid-cols-4 gap-2">
                             <Input
-                                placeholder={t('EDITOR.ITEM_UNIT')}
+                                placeholder={t('EDITOR.TAB.DATA.ITEM_UNIT')}
                                 value={item.unit}
                                 onChange={(e) => updateItem(item.id, { unit: e.target.value })}
                             />
                             <Input
                                 type="number"
                                 min={0}
-                                placeholder={t('EDITOR.ITEM_QTY')}
+                                placeholder={t('EDITOR.TAB.DATA.ITEM_QTY')}
                                 value={item.qty || ''}
                                 onChange={(e) =>
                                     updateItem(item.id, { qty: Number(e.target.value) })
@@ -228,7 +211,7 @@ export function EditTab({ docType }: EditTabProps) {
                             <Input
                                 type="number"
                                 min={0}
-                                placeholder={t('EDITOR.ITEM_UNIT_PRICE')}
+                                placeholder={t('EDITOR.TAB.DATA.ITEM_UNIT_PRICE')}
                                 value={item.unitPrice || ''}
                                 onChange={(e) =>
                                     updateItem(item.id, { unitPrice: Number(e.target.value) })
@@ -243,13 +226,13 @@ export function EditTab({ docType }: EditTabProps) {
                     onClick={addItem}
                     className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed py-2 text-sm hover:border-primary hover:bg-primary/5"
                 >
-                    <Plus className="size-4" /> Add item
+                    <Plus className="size-4" /> {t('EDITOR.TAB.DATA.ADD_ITEM')}
                 </button>
             </section>
 
             {isReceipt && (
                 <div className="space-y-1 border-t pt-4">
-                    <Label className="text-xs">{t('EDITOR.PAYMENT_METHOD')}</Label>
+                    <Label className="text-xs">{t('EDITOR.TAB.DATA.PAYMENT_METHOD')}</Label>
                     <Input
                         value={doc.paymentMethod ?? ''}
                         onChange={(e) => setField('paymentMethod', e.target.value)}
@@ -258,7 +241,7 @@ export function EditTab({ docType }: EditTabProps) {
             )}
 
             <div className="space-y-1 border-t pt-4">
-                <Label className="text-xs">{t('EDITOR.REMARK')}</Label>
+                <Label className="text-xs">{t('EDITOR.TAB.DATA.REMARK')}</Label>
                 <Textarea
                     value={doc.remark ?? ''}
                     onChange={(e) => setField('remark', e.target.value)}

@@ -4,41 +4,65 @@ import { pdfStyles as s } from '@/lib/pdf/PdfStyles';
 import type { PdfLabels } from '@/types/pdfLabels';
 
 interface PdfTotalsProps {
-    subTotal: number;
-    taxAmount: number;
-    total: number;
-    includeTax: boolean;
+    subTotalAmt: number;
     taxRate: number;
+    taxAmt: number;
+    totalAmt: number;
+    whtRate: number;
+    whtAmt: number;
+    netTotalAmt: number;
     labels: PdfLabels;
+    layout: {
+        showTax?: boolean;
+        showWht?: boolean;
+    };
 }
 
 export function PdfTotals({
-    subTotal,
-    taxAmount,
-    total,
-    includeTax,
+    subTotalAmt,
     taxRate,
+    taxAmt,
+    totalAmt,
+    whtRate,
+    whtAmt,
+    netTotalAmt,
     labels,
+    layout,
 }: PdfTotalsProps) {
-    const taxLabel = labels.tax.replace('{rate}', String(taxRate));
+    const taxLabel = labels.taxAmt.replace('{taxRate}', String(taxRate));
+    const whtLabel = labels.whtAmt.replace('{whtAmt}', String(whtRate));
 
     return (
         <View style={s.totalsBlock}>
             <View style={s.totalsRow}>
-                <Text style={{ fontSize: 9, color: '#64748b' }}>{labels.subTotal}</Text>
-                <Text style={{ fontSize: 9, fontWeight: 'bold' }}>{formatCurrency(subTotal)}</Text>
+                <Text style={{ fontSize: 9, color: '#64748b' }}>{labels.subTotalAmt}</Text>
+                <Text style={{ fontSize: 9, fontWeight: 'bold' }}>
+                    {formatCurrency(subTotalAmt)}
+                </Text>
             </View>
-            {includeTax ? (
+            {layout.showTax ? (
                 <View style={s.totalsRow}>
                     <Text style={{ fontSize: 9, color: '#64748b' }}>{taxLabel}</Text>
                     <Text style={{ fontSize: 9, fontWeight: 'bold' }}>
-                        {formatCurrency(taxAmount)}
+                        {formatCurrency(taxAmt)}
+                    </Text>
+                </View>
+            ) : null}
+            <View style={s.totalsRow}>
+                <Text style={{ fontSize: 9, color: '#64748b' }}>{labels.totalAmt}</Text>
+                <Text style={{ fontSize: 9, fontWeight: 'bold' }}>{formatCurrency(totalAmt)}</Text>
+            </View>
+            {layout.showWht ? (
+                <View style={s.totalsRow}>
+                    <Text style={{ fontSize: 9, color: '#64748b' }}>{whtLabel}</Text>
+                    <Text style={{ fontSize: 9, fontWeight: 'bold' }}>
+                        {formatCurrency(whtAmt)}
                     </Text>
                 </View>
             ) : null}
             <View style={s.totalGrand}>
-                <Text style={s.totalGrandText}>{labels.total}</Text>
-                <Text style={s.totalGrandText}>{formatCurrency(total)}</Text>
+                <Text style={s.totalGrandText}>{labels.netTotalAmt}</Text>
+                <Text style={s.totalGrandText}>{formatCurrency(netTotalAmt)}</Text>
             </View>
         </View>
     );

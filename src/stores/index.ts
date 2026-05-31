@@ -1,11 +1,11 @@
-import { useConfigStore } from './configStore';
+import { useLayoutStore } from './layoutStore';
 import { useDocumentStore } from './documentStore';
 import { useVendorStore } from './vendorStore';
 
-export { useConfigStore, useDocumentStore, useVendorStore };
+export { useLayoutStore, useDocumentStore, useVendorStore };
 
 export function resetAllStores() {
-    useConfigStore.getState().reset();
+    useLayoutStore.getState().reset();
     useDocumentStore.getState().reset();
-    useVendorStore.getState().reset();
+    // useVendorStore.getState().reset();
 }

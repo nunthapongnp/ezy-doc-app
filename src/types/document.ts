@@ -7,7 +7,7 @@ export interface LineItem {
     qty: number;
     unit: string;
     unitPrice: number;
-    total: number;
+    totalAmt: number;
 }
 
 export interface PartyInfo {
@@ -24,19 +24,33 @@ export interface DocumentState {
     docNo: string;
     refNo?: string;
     docDate: Date;
-    expiryDate?: Date;
     dueDate?: Date;
     vendor: PartyInfo & { logoDataUrl?: string };
     customer: PartyInfo;
     items: LineItem[];
-    subTotal: number;
-    taxAmount: number;
-    total: number;
+    subTotalAmt: number;
+    taxRate: number;
+    taxAmt: number;
+    totalAmt: number;
+    whtRate: number;
+    whtAmt: number;
+    netTotalAmt: number;
     remark?: string;
     paymentMethod?: string;
-    showDocNo: boolean;
-    includeTax: boolean;
-    taxRate: number;
+    layout: {
+        showDocNo: boolean;
+        showRefNo: boolean;
+        showDocDate: boolean;
+        showDueDate: boolean;
+        showTax: boolean;
+        showWht: boolean;
+        showRemark: boolean;
+        showPaymentMethod: boolean;
+        showItemSeq: boolean;
+        showItemDesc: boolean;
+        showItemUnit: boolean;
+        showItemUnitPrice: boolean;
+    };
 }
 
 export const EMPTY_PARTY: PartyInfo = {
@@ -55,6 +69,6 @@ export function createEmptyLineItem(): LineItem {
         qty: 1,
         unit: '',
         unitPrice: 0,
-        total: 0,
+        totalAmt: 0,
     };
 }

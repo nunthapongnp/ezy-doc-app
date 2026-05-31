@@ -2,7 +2,8 @@ import type { DocType } from '@/types/document';
 
 export const LOCALES = ['en', 'th'] as const;
 export type AppLocale = (typeof LOCALES)[number];
-export const DEFAULT_LOCALE: AppLocale = 'en';
+export const DEFAULT_LOCALE: AppLocale =
+    (process.env.NEXT_PUBLIC_DEFAULT_LOCALE as AppLocale) || 'en';
 
 export const DOCUMENT_ROUTES = {
     quotation: 'QUOTATION',

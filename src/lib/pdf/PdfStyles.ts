@@ -70,6 +70,7 @@ export const pdfStyles = StyleSheet.create({
         paddingVertical: 6,
         borderBottom: '1px solid #f1f5f9',
     },
+    colSeq: { width: '5%' },
     colDesc: { width: '40%' },
     colUnit: { width: '12%', textAlign: 'center' },
     colQty: { width: '10%', textAlign: 'center' },
@@ -104,8 +105,8 @@ export const pdfStyles = StyleSheet.create({
         color: '#94a3b8',
     },
     logo: {
-        width: 56,
-        height: 56,
+        width: 74,
+        height: 74,
         objectFit: 'contain',
     },
 });

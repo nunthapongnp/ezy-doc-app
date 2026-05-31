@@ -10,15 +10,33 @@ export function registerPdfFonts(): void {
         family: 'NotoSans',
         fonts: [
             {
-                src: 'https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts/hinted/ttf/NotoSans/NotoSans-Regular.ttf',
+                src: '/fonts/Noto_Sans/static/NotoSans-Regular.ttf',
                 fontWeight: 'normal',
+                fontStyle: 'normal',
             },
             {
-                src: 'https://cdn.jsdelivr.net/gh/googlefonts/noto-fonts/hinted/ttf/NotoSans/NotoSans-Bold.ttf',
+                src: 'fonts/Noto_Sans/static/NotoSans-Bold.ttf',
                 fontWeight: 'bold',
+                fontStyle: 'normal',
+            },
+        ],
+    });
+
+    Font.register({
+        family: 'NotoSansThai',
+        fonts: [
+            {
+                src: '/fonts/Noto_Sans_Thai/static/NotoSansThai-Regular.ttf',
+                fontWeight: 'normal',
+                fontStyle: 'normal',
+            },
+            {
+                src: '/fonts/Noto_Sans_Thai/static/NotoSansThai-Bold.ttf',
+                fontWeight: 'bold',
+                fontStyle: 'normal',
             },
         ],
     });
 }
 
-export const PDF_FONT_FAMILY = 'NotoSans';
+export const PDF_FONT_FAMILY = 'NotoSansThai';

@@ -22,8 +22,6 @@ export function PreviewTab({ isActive }: PreviewTabProps) {
     const { triggerVignette } = useVignetteAd();
 
     useEffect(() => {
-        console.log(isActive);
-
         if (isActive) triggerVignette('preview_tab_open');
     }, [isActive, triggerVignette]);
 

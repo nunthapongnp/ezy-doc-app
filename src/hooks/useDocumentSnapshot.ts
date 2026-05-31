@@ -4,7 +4,7 @@ import { useTolgee } from '@tolgee/react';
 import { useMemo } from 'react';
 import { computeDocNumber } from '@/lib/docNumber';
 import { buildPdfLabels } from '@/lib/pdf/buildPdfLabels';
-import { useConfigStore } from '@/stores/configStore';
+import { useLayoutStore } from '@/stores/layoutStore';
 import { useDocumentStore } from '@/stores/documentStore';
 import { useVendorStore } from '@/stores/vendorStore';
 import type { DocumentState, PartyInfo } from '@/types/document';
@@ -15,7 +15,7 @@ export function useDocumentSnapshot(): {
     labels: PdfLabels | null;
 } {
     const { doc } = useDocumentStore();
-    const { config } = useConfigStore();
+    const { layout } = useLayoutStore();
     const { vendor } = useVendorStore();
     const tolgee = useTolgee(['language', 'cache']);
 
@@ -23,8 +23,8 @@ export function useDocumentSnapshot(): {
         if (!doc.docType) return { snapshot: null, labels: null };
 
         const docDate = doc.docDate ?? new Date();
-        const docNo = config.showDocNo
-            ? computeDocNumber(doc.docType, docDate, config.seqNumber)
+        const docNo = layout.header.showDocNo
+            ? computeDocNumber(doc.docType, docDate, layout.header.docSeqNumber)
             : '';
 
         const vendorParty: PartyInfo & { logoDataUrl?: string } = {
@@ -42,7 +42,6 @@ export function useDocumentSnapshot(): {
             docNo,
             refNo: doc.refNo,
             docDate,
-            expiryDate: doc.expiryDate,
             dueDate: doc.dueDate,
             vendor: vendorParty,
             customer: doc.customer ?? {
@@ -53,22 +52,37 @@ export function useDocumentSnapshot(): {
                 email: '',
             },
             items: doc.items ?? [],
-            subTotal: doc.subTotal ?? 0,
-            taxAmount: doc.taxAmount ?? 0,
-            total: doc.total ?? 0,
+            subTotalAmt: doc.subTotalAmt ?? 0,
+            taxRate: layout.footer.taxRate,
+            taxAmt: doc.taxAmt ?? 0,
+            totalAmt: doc.totalAmt ?? 0,
+            whtRate: layout.footer.whtRate,
+            whtAmt: doc.whtAmt ?? 0,
+            netTotalAmt: doc.netTotalAmt ?? 0,
             remark: doc.remark,
             paymentMethod: doc.paymentMethod,
-            showDocNo: config.showDocNo,
-            includeTax: config.includeTax,
-            taxRate: config.taxRate,
+            layout: {
+                showDocNo: layout.header.showDocNo,
+                showRefNo: layout.header.showRefNo,
+                showDocDate: layout.header.showDocDate,
+                showDueDate: layout.header.showDueDate,
+                showTax: layout.footer.showTax,
+                showWht: layout.footer.showWht,
+                showRemark: layout.showRemark,
+                showPaymentMethod: layout.showPaymentMethod,
+                showItemSeq: layout.items.showSeq,
+                showItemDesc: layout.items.showDesc,
+                showItemUnit: layout.items.showUnit,
+                showItemUnitPrice: layout.items.showUnitPrice,
+            },
         };
 
-        const pdfLang = config.language;
+        const pdfLang = layout.language;
         const t = (key: string, params?: Record<string, string | number>) =>
             tolgee.t(key, { language: pdfLang, ...params });
 
-        const labels = buildPdfLabels(t, doc.docType, config.taxRate);
+        const labels = buildPdfLabels(t, doc.docType, layout.footer.taxRate);
 
         return { snapshot, labels };
-    }, [doc, config, vendor, tolgee]);
+    }, [doc, layout, vendor, tolgee]);
 }

@@ -6,6 +6,7 @@ import { PdfLineItems } from './shared/PdfLineItems';
 import { PdfTotals } from './shared/PdfTotals';
 import type { DocumentState } from '@/types/document';
 import type { PdfLabels } from '@/types/pdfLabels';
+import { PdfFooter } from './shared/PdfFooters';
 
 export interface DocumentPdfTemplateProps {
     data: DocumentState;
@@ -13,7 +14,6 @@ export interface DocumentPdfTemplateProps {
 }
 
 export function DocumentPdfTemplate({ data, labels }: DocumentPdfTemplateProps) {
-    const isQuotation = data.docType === 'QUOTATION';
     const isReceipt = data.docType === 'RECEIPT';
 
     return (
@@ -22,18 +22,29 @@ export function DocumentPdfTemplate({ data, labels }: DocumentPdfTemplateProps) 
                 <PdfHeader
                     title={labels.title}
                     docNo={data.docNo}
-                    showDocNo={data.showDocNo}
                     refNo={data.refNo}
                     docDate={data.docDate}
-                    expiryDate={data.expiryDate}
                     dueDate={data.dueDate}
                     logoDataUrl={data.vendor.logoDataUrl}
                     labels={labels}
-                    showDueDate={!isReceipt}
-                    showExpiryDate={isQuotation}
+                    layout={{
+                        showDocNo: data.layout.showDocNo,
+                        showRefNo: data.layout.showRefNo,
+                        showDocDate: data.layout.showDocDate,
+                        showDueDate: data.layout.showDueDate,
+                    }}
                 />
                 <PdfParties vendor={data.vendor} customer={data.customer} labels={labels} />
-                <PdfLineItems items={data.items} labels={labels} />
+                <PdfLineItems
+                    items={data.items}
+                    labels={labels}
+                    layout={{
+                        showSeq: data.layout.showItemSeq,
+                        showDesc: data.layout.showItemDesc,
+                        showUnit: data.layout.showItemUnit,
+                        showUnitPrice: data.layout.showItemUnitPrice,
+                    }}
+                />
                 <View style={{ flexDirection: 'row', marginTop: 20 }}>
                     {data.remark ? (
                         <View style={{ flex: 1 }}>
@@ -48,17 +59,28 @@ export function DocumentPdfTemplate({ data, labels }: DocumentPdfTemplateProps) 
                         <View style={{ flex: 1 }} />
                     )}
                     <PdfTotals
-                        subTotal={data.subTotal}
-                        taxAmount={data.taxAmount}
-                        total={data.total}
-                        includeTax={data.includeTax}
+                        subTotalAmt={data.subTotalAmt}
                         taxRate={data.taxRate}
+                        taxAmt={data.taxAmt}
+                        totalAmt={data.totalAmt}
+                        whtRate={data.whtRate}
+                        whtAmt={data.whtAmt}
+                        netTotalAmt={data.netTotalAmt}
                         labels={labels}
+                        layout={{
+                            showTax: data.layout.showTax,
+                            showWht: data.layout.showWht,
+                        }}
                     />
                 </View>
                 {isReceipt && data.paymentMethod ? (
                     <Text style={[s.footer, { marginTop: 12 }]}>{data.paymentMethod}</Text>
                 ) : null}
+                <PdfFooter
+                    vendorName={data.vendor.name}
+                    customerName={data.customer.name}
+                    labels={labels}
+                />
             </Page>
         </Document>
     );

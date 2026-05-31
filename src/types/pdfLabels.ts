@@ -3,17 +3,19 @@ export interface PdfLabels {
     docNo: string;
     refNo: string;
     date: string;
-    expiryDate: string;
     dueDate: string;
     vendor: string;
     customer: string;
-    description: string;
-    qty: string;
-    unit: string;
-    unitPrice: string;
-    amount: string;
-    subTotal: string;
-    tax: string;
-    total: string;
+    itemSeq: string;
+    itemDesc: string;
+    itemQty: string;
+    itemUnit: string;
+    itemUnitPrice: string;
+    itemTotalAmt: string;
+    subTotalAmt: string;
+    taxAmt: string;
+    totalAmt: string;
+    whtAmt: string;
+    netTotalAmt: string;
     remark: string;
 }

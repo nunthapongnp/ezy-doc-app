@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { HeroSection } from '@/components/view/core/HeroSection';
-import { ToolsSection } from '@/components/view/core/ToolsSection';
+import { HeroSection } from '@/components/view/layout/HeroSection';
+import { ToolsSection } from '@/components/view/layout/ToolsSection';
 import { LOCALES, type AppLocale } from '@/lib/constants';
 
 export async function generateStaticParams() {
