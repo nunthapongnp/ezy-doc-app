@@ -1,31 +1,29 @@
-"use client";
+'use client';
 
-import { pdf } from "@react-pdf/renderer";
-import { useVignetteAd } from "@/components/view/ads/VignetteAdTrigger";
-import { TEMPLATE_MAP } from "@/lib/pdf/templateMap";
-import { useDocumentSnapshot } from "./useDocumentSnapshot";
+import { pdf } from '@react-pdf/renderer';
+import { useVignetteAd } from '@/components/view/ads/VignetteAdTrigger';
+import { TEMPLATE_MAP } from '@/lib/pdf/templateMap';
+import { useDocumentSnapshot } from './useDocumentSnapshot';
 
 export function usePDFDownload() {
-  const { snapshot, labels } = useDocumentSnapshot();
-  const { triggerVignette } = useVignetteAd();
+    const { snapshot, labels } = useDocumentSnapshot();
+    const { triggerVignette } = useVignetteAd();
 
-  const download = async () => {
-    if (!snapshot || !labels) return;
+    const download = async () => {
+        if (!snapshot || !labels) return;
 
-    triggerVignette("export_pdf_click");
+        triggerVignette('export_pdf_click');
 
-    const Template = TEMPLATE_MAP[snapshot.docType];
-    const blob = await pdf(
-      <Template data={snapshot} labels={labels} />,
-    ).toBlob();
+        const Template = TEMPLATE_MAP[snapshot.docType];
+        const blob = await pdf(<Template data={snapshot} labels={labels} />).toBlob();
 
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${snapshot.docNo || snapshot.docType}.pdf`;
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${snapshot.docNo || snapshot.docType}.pdf`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
 
-  return { download, canDownload: Boolean(snapshot && labels) };
+    return { download, canDownload: Boolean(snapshot && labels) };
 }
