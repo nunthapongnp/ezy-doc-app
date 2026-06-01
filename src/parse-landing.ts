@@ -92,7 +92,12 @@ function parseSocialProof(markdown: string) {
 
 function parseDocumentCards(markdown: string) {
     const section = getSection(markdown, 'DOCUMENT TYPE CARDS SECTION');
-    const cards = [];
+    const cards = [] as Array<{
+        title: string;
+        subtitle: string;
+        description: string;
+        cta: string;
+    }>;
     const pattern =
         /### Card \d+ [—-] [^\n]+\s*\*\*([^*]+)\*\*\s*\(([^)]+)\)\s*([\s\S]*?)\n→\s*\*\*([^*]+)\*\*/g;
 
@@ -110,7 +115,7 @@ function parseDocumentCards(markdown: string) {
 
 function parseFeatures(markdown: string) {
     const section = getSection(markdown, 'FEATURES SECTION');
-    const features = [];
+    const features = [] as Array<{ eyebrow: string; title: string; description: string }>;
     const pattern =
         /### Feature \d+ [—-] ([^\n]+)\s*\*\*([^*]+)\*\*\s*([\s\S]*?)(?=\n### Feature \d+|\n---|$)/g;
 
@@ -127,7 +132,7 @@ function parseFeatures(markdown: string) {
 
 function parseSteps(markdown: string) {
     const section = getSection(markdown, 'HOW IT WORKS SECTION');
-    const steps = [];
+    const steps = [] as Array<{ title: string; description: string }>;
     const pattern = /### Step \d+\s*\*\*([^*]+)\*\*\s*([\s\S]*?)(?=\n### Step \d+|\n---|$)/g;
 
     for (const match of section.matchAll(pattern)) {
