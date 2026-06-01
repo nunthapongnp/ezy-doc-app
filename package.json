@@ -6,8 +6,6 @@
         "dev": "bun --env-file=environment/.env.development.local next dev",
         "build": "opennextjs-cloudflare build",
         "build:next": "next build",
-        "test": "vitest run",
-        "test:watch": "vitest",
         "format": "npx prettier . --write",
         "preview": "bun run build && opennextjs-cloudflare preview",
         "deploy": "bun run build && opennextjs-cloudflare deploy",

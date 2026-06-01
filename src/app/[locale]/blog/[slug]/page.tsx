@@ -12,7 +12,7 @@ import {
     localizedUrl,
 } from '@/lib/seo';
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export function generateStaticParams() {
     return getBlogPosts('th').map((post) => ({
@@ -30,7 +30,7 @@ export async function generateMetadata({
     const decodedSlug = decodeURIComponent(slug);
     if (!LOCALES.includes(locale as AppLocale)) return {};
 
-    const post = getBlogPost(locale as AppLocale, decodedSlug);
+    const post = getBlogPost(locale as AppLocale, decodedSlug) || getBlogPost(locale as AppLocale, slug);
     if (!post) return {};
 
     return {
@@ -66,7 +66,7 @@ export default async function BlogPostPage({
     const decodedSlug = decodeURIComponent(slug);
     if (!LOCALES.includes(locale as AppLocale)) notFound();
 
-    const post = getBlogPost(locale as AppLocale, decodedSlug);
+    const post = getBlogPost(locale as AppLocale, decodedSlug) || getBlogPost(locale as AppLocale, slug);
     if (!post) notFound();
 
     const articleUrl = localizedUrl(post.meta.locale, `blog/${post.meta.slug}`);
@@ -135,3 +135,4 @@ export default async function BlogPostPage({
         </article>
     );
 }
+
