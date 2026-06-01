@@ -1,6 +1,10 @@
 import type { DocType } from '@/types/document';
 
-export const LOCALES = ['en', 'th'] as const;
+export const LOCALE_LABELS: Record<string, string> = {
+    en: 'English',
+    th: 'ภาษาไทย',
+};
+export const LOCALES = Object.keys(LOCALE_LABELS);
 export type AppLocale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: AppLocale =
     (process.env.NEXT_PUBLIC_DEFAULT_LOCALE as AppLocale) || 'en';

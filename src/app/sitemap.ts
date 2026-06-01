@@ -1,12 +1,14 @@
 import type { MetadataRoute } from 'next';
 import { DOCUMENT_ROUTES, LOCALES, type AppLocale } from '@/lib/constants';
-import { localizedUrl } from '@/lib/seo';
+import { getBlogPosts } from '@/lib/content';
+import { absoluteUrl, localizedUrl } from '@/lib/seo';
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const now = new Date();
     const tools = Object.keys(DOCUMENT_ROUTES);
+    const blogPosts = getBlogPosts('th');
 
-    return LOCALES.flatMap((locale) => {
+    const localizedRoutes = LOCALES.flatMap((locale) => {
         const appLocale = locale as AppLocale;
         const alternates = {
             languages: {
@@ -37,4 +39,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
             })),
         ];
     });
+
+    return [
+        ...localizedRoutes,
+        {
+            url: absoluteUrl('/blog'),
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: localizedUrl('th', 'blog'),
+            lastModified: now,
+            changeFrequency: 'weekly',
+            priority: 0.85,
+        },
+        ...blogPosts.map((post) => ({
+            url: localizedUrl(post.meta.locale, `blog/${post.meta.slug}`),
+            lastModified: new Date(post.meta.publishedAt),
+            changeFrequency: 'monthly' as const,
+            priority: 0.75,
+        })),
+    ];
 }

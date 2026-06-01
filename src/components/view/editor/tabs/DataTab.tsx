@@ -46,7 +46,7 @@ export function DataTab({ docType }: DataTabProps) {
     const isReceipt = docType === 'RECEIPT';
 
     return (
-        <div className="mx-auto min-w-3xl max-w-3xl space-y-6 p-6 overflow-y-auto h-full">
+        <div className="mx-auto min-w-3xl max-w-3xl space-y-6 p-6 overflow-y-auto h-full bg-card">
             <LogoUpload />
 
             <div className="grid gap-4 sm:grid-cols-2">

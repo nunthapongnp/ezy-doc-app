@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { HeroSection } from '@/components/view/layout/HeroSection';
+import { LandingSections } from '@/components/view/layout/LandingSections';
 import { ToolsSection } from '@/components/view/layout/ToolsSection';
 import { LOCALES, type AppLocale } from '@/lib/constants';
+import { getBlogPosts, getLandingContent } from '@/lib/content';
 import {
     HOME_SEO,
     buildBreadcrumbJsonLd,
@@ -23,7 +25,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const { locale } = await params;
     const appLocale = LOCALES.includes(locale as AppLocale) ? (locale as AppLocale) : 'en';
-    const seo = HOME_SEO[appLocale];
+    const landing = getLandingContent(appLocale);
+    const seo = landing.metadata.title ? landing.metadata : HOME_SEO[appLocale];
 
     return {
         title: seo.title,
@@ -52,9 +55,28 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
     const { locale } = await params;
     if (!LOCALES.includes(locale as AppLocale)) notFound();
     const appLocale = locale as AppLocale;
+    const landing = getLandingContent(appLocale);
+    const latestPosts =
+        appLocale === 'th'
+            ? getBlogPosts('th')
+                  .map((post) => post.meta)
+                  .slice(0, 3)
+            : [];
     const jsonLd = [
         buildWebAppJsonLd(appLocale),
         buildBreadcrumbJsonLd(appLocale, [{ name: 'Home', path: '' }]),
+        {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: landing.faq.map((item) => ({
+                '@type': 'Question',
+                name: item.question,
+                acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: item.answer,
+                },
+            })),
+        },
     ];
 
     return (
@@ -63,30 +85,9 @@ export default async function LocaleHomePage({ params }: { params: Promise<{ loc
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <HeroSection locale={locale as AppLocale} />
-            <ToolsSection locale={locale as AppLocale} />
-            <section className="border-y bg-muted/20 py-16">
-                <div className="container mx-auto grid gap-8 px-4 text-center md:grid-cols-3">
-                    <div>
-                        <h4 className="font-bold">Session-only</h4>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                            Nothing is saved to disk or cloud. Export PDF before you leave.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 className="font-bold">EN + TH</h4>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                            UI locale and PDF document language are configured independently.
-                        </p>
-                    </div>
-                    <div>
-                        <h4 className="font-bold">Free to use</h4>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                            Client-side PDF generation with optional ad-supported hosting.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            <HeroSection locale={appLocale} content={landing.hero} />
+            <ToolsSection locale={appLocale} cards={landing.documentCards} />
+            <LandingSections locale={appLocale} content={landing} latestPosts={latestPosts} />
         </div>
     );
 }

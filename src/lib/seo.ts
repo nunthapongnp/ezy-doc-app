@@ -9,7 +9,10 @@ import {
 
 const SITE_BASE_URL = SITE_URL.replace(/\/$/, '');
 
-export const HOME_SEO: Record<AppLocale, { title: string; description: string; keywords: string[] }> = {
+export const HOME_SEO: Record<
+    AppLocale,
+    { title: string; description: string; keywords: string[] }
+> = {
     en: {
         title: `${APP_NAME} - Free Quotation, Invoice & Receipt Generator`,
         description:
@@ -48,14 +51,24 @@ export const TOOL_SEO: Record<
             title: `Free Quotation Generator - Create PDF Quotes Online | ${APP_NAME}`,
             description:
                 'Create professional quotations online for free. Add company details, customer information, line items, tax, and export a ready-to-send PDF quote.',
-            keywords: ['quotation generator', 'quote PDF', 'free quotation maker', 'online quote generator'],
+            keywords: [
+                'quotation generator',
+                'quote PDF',
+                'free quotation maker',
+                'online quote generator',
+            ],
         },
         th: {
             name: 'เครื่องมือสร้างใบเสนอราคา',
             title: `สร้างใบเสนอราคา PDF ฟรี ออนไลน์ | ${APP_NAME}`,
             description:
                 'สร้างใบเสนอราคาออนไลน์ฟรี ใส่ข้อมูลบริษัท ลูกค้า รายการสินค้า ภาษี และดาวน์โหลด PDF พร้อมส่งให้ลูกค้าได้ทันที',
-            keywords: ['สร้างใบเสนอราคา', 'ใบเสนอราคา PDF', 'โปรแกรมใบเสนอราคา', 'ออกใบเสนอราคาออนไลน์'],
+            keywords: [
+                'สร้างใบเสนอราคา',
+                'ใบเสนอราคา PDF',
+                'โปรแกรมใบเสนอราคา',
+                'ออกใบเสนอราคาออนไลน์',
+            ],
         },
     },
     invoice: {
@@ -71,7 +84,12 @@ export const TOOL_SEO: Record<
             title: `สร้างใบแจ้งหนี้ PDF ฟรี ออนไลน์ | ${APP_NAME}`,
             description:
                 'สร้างใบแจ้งหนี้ออนไลน์ฟรี ใส่ข้อมูลผู้ขาย ลูกค้า รายการบริการ ภาษี และดาวน์โหลด PDF ได้ทันที',
-            keywords: ['สร้างใบแจ้งหนี้', 'ใบแจ้งหนี้ PDF', 'โปรแกรมออกใบแจ้งหนี้', 'invoice ภาษาไทย'],
+            keywords: [
+                'สร้างใบแจ้งหนี้',
+                'ใบแจ้งหนี้ PDF',
+                'โปรแกรมออกใบแจ้งหนี้',
+                'invoice ภาษาไทย',
+            ],
         },
     },
     acceptance: {
@@ -92,7 +110,12 @@ export const TOOL_SEO: Record<
             title: `สร้างใบตรวจรับงาน PDF ฟรี ออนไลน์ | ${APP_NAME}`,
             description:
                 'สร้างใบตรวจรับงานออนไลน์ฟรี บันทึกรายละเอียดงาน ผู้รับงาน ยอดรวม และดาวน์โหลด PDF พร้อมใช้งาน',
-            keywords: ['ใบตรวจรับงาน', 'สร้างใบตรวจรับงาน', 'เอกสารตรวจรับงาน PDF', 'แบบฟอร์มตรวจรับงาน'],
+            keywords: [
+                'ใบตรวจรับงาน',
+                'สร้างใบตรวจรับงาน',
+                'เอกสารตรวจรับงาน PDF',
+                'แบบฟอร์มตรวจรับงาน',
+            ],
         },
     },
     receipt: {
@@ -108,7 +131,12 @@ export const TOOL_SEO: Record<
             title: `สร้างใบเสร็จรับเงิน PDF ฟรี ออนไลน์ | ${APP_NAME}`,
             description:
                 'สร้างใบเสร็จรับเงินออนไลน์ฟรี ใส่รายละเอียดผู้ชำระเงิน รายการ วิธีชำระเงิน ภาษี และดาวน์โหลด PDF ได้ทันที',
-            keywords: ['สร้างใบเสร็จรับเงิน', 'ใบเสร็จรับเงิน PDF', 'โปรแกรมออกใบเสร็จ', 'receipt ภาษาไทย'],
+            keywords: [
+                'สร้างใบเสร็จรับเงิน',
+                'ใบเสร็จรับเงิน PDF',
+                'โปรแกรมออกใบเสร็จ',
+                'receipt ภาษาไทย',
+            ],
         },
     },
 };
@@ -176,7 +204,10 @@ export function buildSoftwareJsonLd(locale: AppLocale, tool: DocumentRoute) {
     };
 }
 
-export function buildBreadcrumbJsonLd(locale: AppLocale, entries: { name: string; path: string }[]) {
+export function buildBreadcrumbJsonLd(
+    locale: AppLocale,
+    entries: { name: string; path: string }[],
+) {
     return {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',

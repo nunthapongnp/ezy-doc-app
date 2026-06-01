@@ -3,6 +3,8 @@ import localFont from 'next/font/local';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LanguageSwitcher } from '@/components/view/layout/LanguageSwitcher';
+import { ThemeSwitcher } from '@/components/view/layout/ThemeSwitcher';
+import { ThemeProvider } from '@/components/theme-provider';
 import { TolgeeNextProvider } from '@/lib/tolgee/client';
 import { APP_NAME, LOCALES, type AppLocale } from '@/lib/constants';
 import { cn } from '@/lib/utils';
@@ -112,26 +114,42 @@ export default async function LocaleLayout({
                 )}
             >
                 <GoogleServices />
-                <TolgeeNextProvider locale={locale as AppLocale}>
-                    <Toaster />
-                    <div className="relative flex min-h-screen flex-col">
-                        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
-                            <div className="container flex h-16 items-center justify-between px-4">
-                                <Link
-                                    href={`/${locale}`}
-                                    className="text-2xl font-bold text-primary"
-                                >
-                                    {APP_NAME}
-                                </Link>
-                                <LanguageSwitcher />
-                            </div>
-                        </header>
-                        <main className="flex-1">{children}</main>
-                        <footer className="border-t bg-muted/40 py-4 text-center text-sm text-muted-foreground">
-                            © 2026 {APP_NAME}. Session-only — export PDF before leaving.
-                        </footer>
-                    </div>
-                </TolgeeNextProvider>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <TolgeeNextProvider locale={locale as AppLocale}>
+                        <Toaster />
+                        <div className="relative flex min-h-screen flex-col">
+                            <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+                                <div className="flex h-16 items-center justify-between px-4">
+                                    <Link
+                                        href={`/${locale}`}
+                                        className="text-2xl font-bold text-primary"
+                                    >
+                                        {APP_NAME}
+                                    </Link>
+                                    <nav className="flex items-center gap-4">
+                                        <Link
+                                            href="/blog"
+                                            className="text-sm font-medium text-muted-foreground transition hover:text-foreground"
+                                        >
+                                            {locale === 'th' ? 'บล็อก' : 'Blog'}
+                                        </Link>
+                                        <LanguageSwitcher />
+                                        <ThemeSwitcher />
+                                    </nav>
+                                </div>
+                            </header>
+                            <main className="flex-1">{children}</main>
+                            <footer className="border-t bg-muted/40 py-4 text-center text-sm text-muted-foreground">
+                                © 2026 {APP_NAME}. Session-only — export PDF before leaving.
+                            </footer>
+                        </div>
+                    </TolgeeNextProvider>
+                </ThemeProvider>
             </body>
         </html>
     );

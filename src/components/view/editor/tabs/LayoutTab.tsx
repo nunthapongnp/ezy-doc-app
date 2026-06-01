@@ -5,17 +5,20 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { ChevronDown } from 'lucide-react';
 import { getDocNoPrefix } from '@/lib/docNumber';
 import { useLayoutStore } from '@/stores/layoutStore';
 import { useDocumentStore } from '@/stores/documentStore';
 import type { DocLanguage } from '@/types/layout';
 import { Separator } from '@/components/ui/separator';
+import { LOCALE_LABELS, LOCALES } from '@/lib/constants';
 
 export function LayoutTab() {
     const { t } = useTranslate();
@@ -28,22 +31,33 @@ export function LayoutTab() {
     const prefix = docType != null ? getDocNoPrefix(docType, docDate) : '----';
 
     return (
-        <div className="mx-auto min-w-xl max-w-xl space-y-6 p-6 overflow-y-auto h-full">
+        <div className="mx-auto min-w-xl max-w-xl space-y-6 p-6 overflow-y-auto h-full bg-card">
             <Label>{t('EDITOR.TAB.LAYOUT.DOC_LANGUAGE')}</Label>
             <div className="grid gap-4 sm:grid-cols-1">
                 <div className="space-y-1">
-                    <Select
-                        value={layout.language}
-                        onValueChange={(v) => layoutStore.setLanguage(v as DocLanguage)}
-                    >
-                        <SelectTrigger className="w-full">
-                            <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="en">English</SelectItem>
-                            <SelectItem value="th">ภาษาไทย</SelectItem>
-                        </SelectContent>
-                    </Select>
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button
+                                variant="outline"
+                                className="w-full justify-between gap-2 font-normal"
+                            >
+                                <span>{LOCALE_LABELS[layout.language]}</span>
+                                <ChevronDown className="size-4 opacity-50 shrink-0" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-full min-w-(--radix-dropdown-menu-trigger-width)">
+                            <DropdownMenuRadioGroup
+                                value={layout.language}
+                                onValueChange={(v) => layoutStore.setLanguage(v as DocLanguage)}
+                            >
+                                {LOCALES.map((code) => (
+                                    <DropdownMenuRadioItem key={code} value={code}>
+                                        {LOCALE_LABELS[code]}
+                                    </DropdownMenuRadioItem>
+                                ))}
+                            </DropdownMenuRadioGroup>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
                 </div>
             </div>
             <Separator />

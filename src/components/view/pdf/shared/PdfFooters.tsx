@@ -40,7 +40,7 @@ export function PdfFooter({ vendorName, customerName, labels }: PdfFooterProps) 
                         flex: 1,
                         flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'flex-end',
+                        justifyContent: 'center',
                         gap: 4,
                     }}
                 >

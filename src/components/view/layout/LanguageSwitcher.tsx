@@ -1,19 +1,16 @@
 'use client';
 
-import { LOCALES, type AppLocale } from '@/lib/constants';
+import { LOCALE_LABELS, LOCALES, type AppLocale } from '@/lib/constants';
 import { usePathname, useRouter } from 'next/navigation';
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
-
-const LOCALE_LABELS: Record<AppLocale, string> = {
-    en: 'English',
-    th: 'ภาษาไทย',
-};
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
+import { Globe, ChevronDown } from 'lucide-react';
 
 export function LanguageSwitcher() {
     const pathname = usePathname();
@@ -30,17 +27,25 @@ export function LanguageSwitcher() {
     };
 
     return (
-        <Select value={currentLocale} onValueChange={handleLanguageChange}>
-            <SelectTrigger className="w-40">
-                <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-                {LOCALES.map((code) => (
-                    <SelectItem key={code} value={code}>
-                        {LOCALE_LABELS[code]}
-                    </SelectItem>
-                ))}
-            </SelectContent>
-        </Select>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="w-40 justify-between gap-2 px-3 font-normal">
+                    <span className="flex items-center gap-2">
+                        <Globe className="size-4 text-muted-foreground" />
+                        {LOCALE_LABELS[currentLocale]}
+                    </span>
+                    <ChevronDown className="size-4 opacity-50 shrink-0" />
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-40">
+                <DropdownMenuRadioGroup value={currentLocale} onValueChange={handleLanguageChange}>
+                    {LOCALES.map((code) => (
+                        <DropdownMenuRadioItem key={code} value={code}>
+                            {LOCALE_LABELS[code]}
+                        </DropdownMenuRadioItem>
+                    ))}
+                </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 }

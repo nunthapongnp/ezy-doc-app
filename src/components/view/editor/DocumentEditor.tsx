@@ -101,22 +101,24 @@ export function DocumentEditor({ route }: DocumentEditorProps) {
 
     return (
         <>
-            <div className="flex h-[calc(100vh-4rem)] flex-col">
-                <SessionWarningBanner />
-                <BannerAd />
+            <div className="flex h-[calc(95vh-4rem)] flex-col">
+                {/* <SessionWarningBanner /> */}
+                {/* <BannerAd /> */}
                 <div className="flex min-h-0 flex-1 overflow-hidden">
                     <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
                         <Tabs defaultValue="layout" className="h-full overflow-scroll">
-                            <TabsList
-                                variant="line"
-                                className="mt-2 w-full justify-between border-b-2"
-                            >
-                                {tabs.map((tab) => (
-                                    <TabsTrigger value={tab.id} key={tab.id}>
-                                        {tab.label}
-                                    </TabsTrigger>
-                                ))}
-                            </TabsList>
+                            <div className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 pb-2">
+                                <TabsList
+                                    variant="line"
+                                    className="mt-2 w-full justify-between border-b-2"
+                                >
+                                    {tabs.map((tab) => (
+                                        <TabsTrigger value={tab.id} key={tab.id}>
+                                            {tab.label}
+                                        </TabsTrigger>
+                                    ))}
+                                </TabsList>
+                            </div>
                             <TabsContent value="layout" className="">
                                 <LayoutTab />
                             </TabsContent>
